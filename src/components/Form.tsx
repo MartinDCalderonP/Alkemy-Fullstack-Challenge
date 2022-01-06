@@ -1,5 +1,6 @@
-import React, { useState, ChangeEvent, MouseEvent } from 'react';
+import React, { useState, useCallback, ChangeEvent, MouseEvent } from 'react';
 import styles from '../styles/Form.module.scss';
+import { throttle } from 'lodash';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -43,40 +44,48 @@ export default function Form() {
 		}
 	};
 
+	const throttledSubmit = useCallback(
+		throttle(() => {
+			console.log('click');
+			if (!move.description || !move.amount) {
+				return;
+			}
+
+			let fetchURL = url;
+			let fetchMethod = 'POST';
+
+			if (move.id) {
+				fetchURL = `${url}/${move.id}`;
+				fetchMethod = 'PUT';
+			}
+
+			fetch(fetchURL, {
+				method: fetchMethod,
+				body: JSON.stringify(move),
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+			})
+				.then((res) => res.json())
+				.then(() => {
+					setMove({
+						id: '',
+						description: '',
+						amount: '',
+						type: 'income',
+						date: new Date(),
+					});
+				})
+				.catch((err) => console.log(err));
+		}, 1000),
+		[move]
+	);
+
 	const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 
-		if (!move.description || !move.amount) {
-			return;
-		}
-
-		let fetchURL = url;
-		let fetchMethod = 'POST';
-
-		if (move.id) {
-			fetchURL = `${url}/${move.id}`;
-			fetchMethod = 'PUT';
-		}
-
-		fetch(fetchURL, {
-			method: fetchMethod,
-			body: JSON.stringify(move),
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
-		})
-			.then((res) => res.json())
-			.then(() => {
-				setMove({
-					id: '',
-					description: '',
-					amount: '',
-					type: 'income',
-					date: new Date(),
-				});
-			})
-			.catch((err) => console.log(err));
+		throttledSubmit();
 	};
 
 	return (
