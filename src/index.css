@@ -1,7 +1,9 @@
 :root {
 	--backgroundColor: #202020;
+	--innerBackgroundColor: #181818;
 	--textColor: #ffffff;
 	--detailsColor: darkblue;
+	--hoverDetailsColor: blue;
 }
 
 * {
@@ -19,4 +21,17 @@ body {
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 		monospace;
+}
+
+.MuiCalendarPicker-root {
+	background-color: var(--innerBackgroundColor);
+}
+
+.MuiCalendarPicker-root .MuiTypography-root {
+	color: var(--textColor);
+}
+
+.MuiPickersDay-root {
+	background-color: var(--backgroundColor) !important;
+	color: var(--textColor) !important;
 }

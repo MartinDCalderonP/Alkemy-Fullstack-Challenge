@@ -1,0 +1,47 @@
+.form {
+	flex: 0.4;
+}
+
+.card {
+	margin: 20px;
+	border: 1px solid var(--detailsColor) !important;
+	background-color: var(--innerBackgroundColor) !important;
+
+	* {
+		color: var(--textColor) !important;
+	}
+}
+
+.cardContent {
+	display: flex;
+	flex-direction: column;
+}
+
+.textField {
+	margin: 10px 5px !important;
+	background-color: var(--backgroundColor) !important;
+
+	fieldset {
+		border-color: var(--detailsColor) !important;
+	}
+
+	path {
+		color: red;
+	}
+}
+
+.formControl {
+	margin: 5px 10px !important;
+}
+
+.cardActions {
+	justify-content: center;
+
+	.sendButton {
+		background-color: var(--detailsColor);
+
+		&:hover {
+			background-color: var(--hoverDetailsColor);
+		}
+	}
+}
