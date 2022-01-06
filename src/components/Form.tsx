@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, MouseEvent } from 'react';
 import styles from '../styles/Form.module.scss';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -14,11 +14,13 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
+const url = 'http://localhost:8888/moves';
+
 export default function Form() {
 	const [move, setMove] = useState({
 		id: '',
 		description: '',
-		amount: undefined,
+		amount: '',
 		type: 'income',
 		date: new Date(),
 	});
@@ -41,12 +43,45 @@ export default function Form() {
 		}
 	};
 
+	const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+
+		if (!move.description || !move.amount) {
+			return;
+		}
+
+		let fetchURL = url;
+		let fetchMethod = 'POST';
+
+		if (move.id) {
+			fetchURL = `${url}/${move.id}`;
+			fetchMethod = 'PUT';
+		}
+
+		fetch(fetchURL, {
+			method: fetchMethod,
+			body: JSON.stringify(move),
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+		})
+			.then((res) => res.json())
+			.then(() => {
+				setMove({
+					id: '',
+					description: '',
+					amount: '',
+					type: 'income',
+					date: new Date(),
+				});
+			})
+			.catch((err) => console.log(err));
+	};
+
 	return (
 		<>
-			<form
-				className={styles.form}
-				// onSubmit={handleSubmit}
-			>
+			<form className={styles.form}>
 				<Card className={styles.card}>
 					<CardContent className={styles.cardContent}>
 						<TextField
@@ -105,6 +140,7 @@ export default function Form() {
 							className={styles.sendButton}
 							variant="contained"
 							type="submit"
+							onClick={handleSubmit}
 						>
 							{!move.id ? 'Send' : 'Update'}
 						</Button>
