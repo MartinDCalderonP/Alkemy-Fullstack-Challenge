@@ -46,7 +46,6 @@ export default function Form() {
 
 	const throttledSubmit = useCallback(
 		throttle(() => {
-			console.log('click');
 			if (!move.description || !move.amount) {
 				return;
 			}
