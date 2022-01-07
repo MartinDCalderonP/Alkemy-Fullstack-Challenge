@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/Table.module.scss';
 import { API } from '../common/Enums';
+import { IMove } from '../common/Interfaces';
 import { capitalizeWord, format } from '../common/Helpers';
 import Toast from './Toast';
-import { IMove } from '../common/Interfaces';
+import { Button } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 export default function Table() {
 	const fetchUrl = `${API.base}${API.moves}`;
@@ -47,10 +50,22 @@ export default function Table() {
 								<td>{capitalizeWord(move.move_type)}</td>
 								<td>{format(move.move_date, 'es')}</td>
 								<td>
-									<button>Edit</button>
+									<Button
+										className={styles.actionButton}
+										variant="contained"
+										type="submit"
+									>
+										<FontAwesomeIcon icon={faEdit} />
+									</Button>
 								</td>
 								<td>
-									<button>Delete</button>
+									<Button
+										className={styles.actionButton}
+										variant="contained"
+										type="submit"
+									>
+										<FontAwesomeIcon icon={faTrashAlt} />
+									</Button>
 								</td>
 							</tr>
 						))}
