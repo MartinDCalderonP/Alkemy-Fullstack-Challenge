@@ -3,7 +3,11 @@ module.exports = {
 		browser: true,
 		es2021: true,
 	},
-	extends: ['plugin:react/recommended'],
+	extends: [
+		'plugin:react/recommended',
+		'plugin:@typescript-eslint/eslint-recommended',
+		'plugin:@typescript-eslint/recommended',
+	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		ecmaFeatures: {
@@ -14,6 +18,8 @@ module.exports = {
 	},
 	plugins: ['react', '@typescript-eslint'],
 	rules: {
+		'no-unused-vars': 'off',
+		'@typescript-eslint/no-unused-vars': ['error'],
 		'no-unused-vars': [
 			'error',
 			{ vars: 'all', args: 'after-used', ignoreRestSiblings: false },
