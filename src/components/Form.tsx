@@ -87,7 +87,7 @@ export default function Form() {
 						date: new Date(),
 					});
 				})
-				.catch((err) => console.log(err));
+				.catch((err) => setMessage(err));
 		}, 1000),
 		[move]
 	);
