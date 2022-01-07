@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 :root {
 	--backgroundColor: #202020;
 	--innerBackgroundColor: #181818;
@@ -9,6 +11,7 @@
 * {
 	margin: 0;
 	padding: 0;
+	font-family: 'Roboto', sans-serif;
 	color: var(--textColor);
 }
 
