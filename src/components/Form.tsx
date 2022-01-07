@@ -1,6 +1,7 @@
 import React, { useState, useCallback, ChangeEvent, MouseEvent } from 'react';
 import styles from '../styles/Form.module.scss';
 import { throttle } from 'lodash';
+import Toast from './Toast';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -26,6 +27,8 @@ export default function Form() {
 		date: new Date(),
 	});
 
+	const [message, setMessage] = useState('');
+
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 
@@ -47,6 +50,12 @@ export default function Form() {
 	const throttledSubmit = useCallback(
 		throttle(() => {
 			if (!move.description || !move.amount) {
+				setMessage('Please fill in all fields');
+				return;
+			}
+
+			if (parseInt(move.amount) <= 0) {
+				setMessage('Amount must be greater than 0');
 				return;
 			}
 
@@ -67,7 +76,8 @@ export default function Form() {
 				},
 			})
 				.then((res) => res.json())
-				.then(() => {
+				.then((data) => {
+					setMessage(data.message);
 					setMove({
 						id: '',
 						description: '',
@@ -85,6 +95,10 @@ export default function Form() {
 		e.preventDefault();
 
 		throttledSubmit();
+	};
+
+	const handleCloseToast = () => {
+		setMessage('');
 	};
 
 	return (
@@ -156,7 +170,7 @@ export default function Form() {
 				</Card>
 			</form>
 
-			{/* <Notification message={message} /> */}
+			{message && <Toast message={message} closeToast={handleCloseToast} />}
 		</>
 	);
 }
