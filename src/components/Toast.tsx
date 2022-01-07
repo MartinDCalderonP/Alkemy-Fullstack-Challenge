@@ -6,7 +6,7 @@ import CloseIcon from './CloseIcon';
 
 export default function Toast({ message, closeToast }: IToastProps) {
 	useEffect(() => {
-		let timeOut = setTimeout(() => {
+		const timeOut = setTimeout(() => {
 			closeToast(true);
 		}, 5000);
 
