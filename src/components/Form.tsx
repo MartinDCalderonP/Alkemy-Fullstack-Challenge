@@ -54,6 +54,11 @@ export default function Form() {
 				return;
 			}
 
+			if (Number.isNaN(parseInt(move.amount))) {
+				setMessage('Amount must be a number');
+				return;
+			}
+
 			if (parseInt(move.amount) <= 0) {
 				setMessage('Amount must be greater than 0');
 				return;
