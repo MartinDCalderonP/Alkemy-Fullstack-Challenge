@@ -1,6 +1,7 @@
 import React, { useState, useCallback, ChangeEvent, MouseEvent } from 'react';
 import styles from '../styles/Form.module.scss';
 import { throttle } from 'lodash';
+import { API } from '../common/Enums';
 import Toast from './Toast';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -15,8 +16,6 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-
-const url = 'http://localhost:8888/moves';
 
 export default function Form() {
 	const [move, setMove] = useState({
@@ -64,13 +63,10 @@ export default function Form() {
 				return;
 			}
 
-			let fetchURL = url;
-			let fetchMethod = 'POST';
-
-			if (move.id) {
-				fetchURL = `${url}/${move.id}`;
-				fetchMethod = 'PUT';
-			}
+			const fetchURL = !move.id
+				? `${API.base}${API.moves}`
+				: `${API.base}${API.moves}/${move.id}`;
+			const fetchMethod = !move.id ? 'POST' : 'PUT';
 
 			fetch(fetchURL, {
 				method: fetchMethod,
