@@ -15,8 +15,8 @@ export default function Table({ moves, message, updateMoves }: ITableProps) {
 			text: "You won't be able to revert this!",
 			icon: 'warning',
 			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
+			confirmButtonColor: 'darkblue',
+			cancelButtonColor: 'darkred',
 			confirmButtonText: 'Yes, delete it!',
 			reverseButtons: true,
 		}).then((result) => {

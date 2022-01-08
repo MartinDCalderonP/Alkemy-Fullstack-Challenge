@@ -38,3 +38,16 @@ code {
 	background-color: var(--backgroundColor) !important;
 	color: var(--textColor) !important;
 }
+
+.swal2-popup {
+	background-color: var(--innerBackgroundColor) !important;
+	color: var(--textColor) !important;
+}
+
+.swal2-warning {
+	border-color: red !important;
+}
+
+.swal2-icon-content {
+	color: red;
+}
