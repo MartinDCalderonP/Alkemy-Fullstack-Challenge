@@ -1,5 +1,8 @@
 import { MouseEventHandler } from 'react';
 
+export interface ITableProps {
+	moves: IMove[];
+}
 export interface IMove {
 	move_id: number;
 	move_description: string;
