@@ -32,12 +32,12 @@ export default function TablesContainer() {
 		<>
 			<div className={styles.tablesContainer}>
 				<div>
-					<h1>Incomes</h1>
+					<h2>Incomes</h2>
 					<Table moves={incomes} />
 				</div>
 
 				<div>
-					<h1>Outcomes</h1>
+					<h2>Outcomes</h2>
 					<Table moves={outcomes} />
 				</div>
 			</div>
