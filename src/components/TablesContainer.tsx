@@ -10,6 +10,10 @@ export default function TablesContainer() {
 	const [moves, setMoves] = useState([]);
 	const [message, setMessage] = useState('');
 
+	const handleCloseToast = () => {
+		setMessage('');
+	};
+
 	const getMoves = () => {
 		fetch(fetchUrl)
 			.then((res) => res.json())
@@ -21,24 +25,36 @@ export default function TablesContainer() {
 		getMoves();
 	}, []);
 
-	const handleCloseToast = () => {
-		setMessage('');
-	};
-
 	const incomes = moves.filter((move: IMove) => move.move_type === 'income');
 	const outcomes = moves.filter((move: IMove) => move.move_type === 'outcome');
+
+	const handleTableMessage = (message: string) => {
+		setMessage(message);
+	};
+
+	const handleUpdateMoves = () => {
+		getMoves();
+	};
 
 	return (
 		<>
 			<div className={styles.tablesContainer}>
 				<div>
 					<h2>Incomes</h2>
-					<Table moves={incomes} />
+					<Table
+						moves={incomes}
+						message={handleTableMessage}
+						updateMoves={handleUpdateMoves}
+					/>
 				</div>
 
 				<div>
 					<h2>Outcomes</h2>
-					<Table moves={outcomes} />
+					<Table
+						moves={outcomes}
+						message={handleTableMessage}
+						updateMoves={handleUpdateMoves}
+					/>
 				</div>
 			</div>
 
