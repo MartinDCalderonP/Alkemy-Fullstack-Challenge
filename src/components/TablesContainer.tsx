@@ -3,9 +3,12 @@ import styles from '../styles/TablesContainer.module.scss';
 import { API } from '../common/Enums';
 import Table from './Table';
 import Toast from './Toast';
-import { IMove } from '../common/Interfaces';
+import { ITablesContainerProps, IMove } from '../common/Interfaces';
 
-export default function TablesContainer() {
+export default function TablesContainer({
+	getMove,
+	refreshMoves,
+}: ITablesContainerProps) {
 	const fetchUrl = `${API.base}${API.moves}`;
 	const [moves, setMoves] = useState([]);
 	const [message, setMessage] = useState('');
@@ -23,7 +26,7 @@ export default function TablesContainer() {
 
 	useEffect(() => {
 		getMoves();
-	}, []);
+	}, [refreshMoves]);
 
 	const incomes = moves.filter((move: IMove) => move.move_type === 'income');
 	const outcomes = moves.filter((move: IMove) => move.move_type === 'outcome');
@@ -32,7 +35,7 @@ export default function TablesContainer() {
 		setMessage(message);
 	};
 
-	const handleUpdateMoves = () => {
+	const handleRefreshMoves = () => {
 		getMoves();
 	};
 
@@ -43,8 +46,9 @@ export default function TablesContainer() {
 					<h2>Incomes</h2>
 					<Table
 						moves={incomes}
+						getMove={getMove}
 						message={handleTableMessage}
-						updateMoves={handleUpdateMoves}
+						refreshMoves={handleRefreshMoves}
 					/>
 				</div>
 
@@ -52,8 +56,9 @@ export default function TablesContainer() {
 					<h2>Outcomes</h2>
 					<Table
 						moves={outcomes}
+						getMove={getMove}
 						message={handleTableMessage}
-						updateMoves={handleUpdateMoves}
+						refreshMoves={handleRefreshMoves}
 					/>
 				</div>
 			</div>

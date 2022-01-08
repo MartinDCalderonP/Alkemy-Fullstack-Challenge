@@ -8,8 +8,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
 
-export default function Table({ moves, message, updateMoves }: ITableProps) {
-	const handleDeleteButton = (moveId: number) => {
+export default function Table({
+	moves,
+	getMove,
+	message,
+	refreshMoves,
+}: ITableProps) {
+	const handleEditMove = (moveId: number) => {
+		getMove(moveId);
+	};
+
+	const handleDeleteMove = (moveId: number) => {
 		Swal.fire({
 			title: 'Are you sure?',
 			text: "You won't be able to revert this!",
@@ -31,7 +40,7 @@ export default function Table({ moves, message, updateMoves }: ITableProps) {
 					.then((res) => res.json())
 					.then((data) => {
 						message(data.message);
-						updateMoves();
+						refreshMoves();
 					})
 					.catch((err) => message(err));
 			}
@@ -61,6 +70,7 @@ export default function Table({ moves, message, updateMoves }: ITableProps) {
 									className={styles.actionButton}
 									variant="contained"
 									type="submit"
+									onClick={() => handleEditMove(move.move_id)}
 								>
 									<FontAwesomeIcon icon={faEdit} />
 								</Button>
@@ -70,7 +80,7 @@ export default function Table({ moves, message, updateMoves }: ITableProps) {
 									className={styles.actionButton}
 									variant="contained"
 									type="submit"
-									onClick={() => handleDeleteButton(move.move_id)}
+									onClick={() => handleDeleteMove(move.move_id)}
 								>
 									<FontAwesomeIcon icon={faTrashAlt} />
 								</Button>

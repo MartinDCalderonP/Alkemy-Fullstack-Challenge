@@ -1,7 +1,14 @@
-import React, { useState, useCallback, ChangeEvent, MouseEvent } from 'react';
+import React, {
+	useState,
+	useEffect,
+	useCallback,
+	ChangeEvent,
+	MouseEvent,
+} from 'react';
 import styles from '../styles/Form.module.scss';
 import { throttle } from 'lodash';
 import { API } from '../common/Enums';
+import { IFormProps } from '../common/Interfaces';
 import Toast from './Toast';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -17,7 +24,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
-export default function Form() {
+export default function Form({ getMove, refreshMoves }: IFormProps) {
 	const [move, setMove] = useState({
 		id: '',
 		description: '',
@@ -27,6 +34,23 @@ export default function Form() {
 	});
 
 	const [message, setMessage] = useState('');
+
+	useEffect(() => {
+		if (getMove) {
+			fetch(`${API.base}${API.moves}/${getMove}`)
+				.then((res) => res.json())
+				.then((data) => {
+					setMove({
+						id: data[0].move_id,
+						description: data[0].move_description,
+						amount: data[0].move_amount,
+						type: data[0].move_type,
+						date: data[0].move_date,
+					});
+				})
+				.catch((err) => setMessage(err));
+		}
+	}, [getMove]);
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -66,6 +90,7 @@ export default function Form() {
 			const fetchURL = !move.id
 				? `${API.base}${API.moves}`
 				: `${API.base}${API.moves}/${move.id}`;
+
 			const fetchMethod = !move.id ? 'POST' : 'PUT';
 
 			fetch(fetchURL, {
@@ -86,6 +111,7 @@ export default function Form() {
 						type: 'income',
 						date: new Date(),
 					});
+					refreshMoves(true);
 				})
 				.catch((err) => setMessage(err));
 		}, 1000),
@@ -142,6 +168,7 @@ export default function Form() {
 								aria-label="type"
 								defaultValue="income"
 								name="type"
+								value={move.type}
 								onChange={handleChange}
 								row
 							>
