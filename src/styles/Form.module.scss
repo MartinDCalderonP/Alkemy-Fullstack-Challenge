@@ -1,6 +1,14 @@
 .form {
 	margin: 20px auto;
-	width: 50vw;
+	width: 90vw;
+
+	@media (min-width: 600px) {
+		width: 70vw;
+	}
+
+	@media (min-width: 900px) {
+		width: 50vw;
+	}
 }
 
 .card {
