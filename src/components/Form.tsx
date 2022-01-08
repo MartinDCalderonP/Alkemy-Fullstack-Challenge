@@ -149,14 +149,23 @@ export default function Form() {
 									value="income"
 									control={<Radio />}
 									label="Income"
+									{...(move.id && { disabled: true })}
 								/>
+
 								<FormControlLabel
 									value="outcome"
 									control={<Radio />}
 									label="Outcome"
+									{...(move.id && { disabled: true })}
 								/>
 							</RadioGroup>
 						</FormControl>
+
+						{move.id && (
+							<p className={styles.radioWarning}>
+								{"You can't change the move type"}.
+							</p>
+						)}
 					</CardContent>
 					<CardActions className={styles.cardActions}>
 						<Button
