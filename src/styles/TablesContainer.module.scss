@@ -1,17 +1,15 @@
 .tablesContainer {
+	width: 90vw;
 	display: flex;
+	flex-direction: column;
 	justify-content: space-around;
-	margin: 20px;
+	margin: 20px auto;
 
 	div {
 		text-align: center;
 	}
 
-	@media (max-width: 599px) {
-		flex-direction: column;
-	}
-
-	@media (min-width: 600px) {
+	@media (min-width: 1200px) {
 		flex-direction: row;
 	}
 }

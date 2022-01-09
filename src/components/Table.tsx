@@ -48,7 +48,7 @@ export default function Table({
 	};
 
 	return (
-		<div className={styles.table}>
+		<div className={styles.tableContainer}>
 			<table>
 				<thead>
 					<tr>
@@ -63,7 +63,7 @@ export default function Table({
 					{moves.map((move: IMove) => (
 						<tr key={move.move_id}>
 							<td>{move.move_description}</td>
-							<td>{'$ ' + move.move_amount}</td>
+							<td>{'$' + move.move_amount}</td>
 							<td>{format(move.move_date, 'es')}</td>
 							<td>
 								<Button
