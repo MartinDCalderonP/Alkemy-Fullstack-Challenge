@@ -34,3 +34,9 @@ export interface ICloseIconProps {
 	className: string;
 	onClick: MouseEventHandler;
 }
+
+export interface IUserData {
+	user_id: number;
+	user_email: string;
+	user_password: string;
+}
