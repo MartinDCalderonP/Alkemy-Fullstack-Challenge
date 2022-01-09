@@ -52,6 +52,8 @@ export default function TablesContainer({
 					/>
 				</div>
 
+				<div className={styles.divider} />
+
 				<div>
 					<h2>Outcomes</h2>
 					<Table
