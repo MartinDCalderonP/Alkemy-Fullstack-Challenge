@@ -1,15 +1,24 @@
-import React, { useState, ChangeEvent, MouseEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import { createPortal } from 'react-dom';
 import styles from '../styles/Modal.module.scss';
+import { useContextState } from '../context/Context';
+import { initialState } from '../context/Reducer';
 import { API } from '../common/Enums';
 import { IModalProps, IUserData } from '../common/Interfaces';
-import { initialState } from '../context/Reducer';
 import useLocalStorage from '../hooks/useLocalStorage';
 import CloseIcon from './CloseIcon';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 export default function Modal({ closeModal }: IModalProps) {
+	const { state, dispatch } = useContextState();
+
+	useEffect(() => {
+		if (state.user.user_id > 0) {
+			closeModal();
+		}
+	}, [state.user.user_id]);
+
 	const [, setUserInStorage] = useLocalStorage<IUserData>(
 		'user',
 		initialState.user
@@ -55,7 +64,12 @@ export default function Modal({ closeModal }: IModalProps) {
 					setMessage(data.message);
 				} else {
 					setUserInStorage(data.user);
-					closeModal();
+					dispatch({
+						type: 'SET_USER',
+						payload: {
+							user: data.user,
+						},
+					});
 				}
 			});
 	};
