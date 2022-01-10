@@ -20,10 +20,6 @@ module.exports = {
 	rules: {
 		'no-unused-vars': 'off',
 		'@typescript-eslint/no-unused-vars': ['error'],
-		'no-unused-vars': [
-			'error',
-			{ vars: 'all', args: 'after-used', ignoreRestSiblings: false },
-		],
 		'no-console': ['error', { allow: ['warn', 'error'] }],
 		'react/prop-types': 'off',
 		quotes: ['error', 'single', { allowTemplateLiterals: true }],
