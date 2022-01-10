@@ -189,7 +189,7 @@ export default function Form({ getMove, refreshMoves }: IFormProps) {
 
 						{move.id && (
 							<p className={styles.radioWarning}>
-								{"You can't change the move type"}.
+								{'You can\'t change the move type'}.
 							</p>
 						)}
 					</CardContent>
