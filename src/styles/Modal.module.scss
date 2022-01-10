@@ -19,13 +19,22 @@
 		border-radius: 5px;
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 		padding: 10px;
+		width: 50vw;
 
-		&:hover {
-			box-shadow: 0 12px 20px rgba(0, 0, 0, 0.6);
-			border-color: var(--hoverDetailsColor);
+		@media (min-width: 600px) {
+			width: 70vw;
+		}
+
+		@media (min-width: 900px) {
+			width: 50vw;
+		}
+
+		* {
+			color: var(--textColor) !important;
 		}
 
 		.closeIcon {
+			align-self: flex-end;
 			margin-left: 20px;
 			font-size: 1.2rem;
 
@@ -36,6 +45,41 @@
 			&:hover {
 				path {
 					fill: var(--hoverDetailsColor);
+				}
+			}
+		}
+
+		.form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+
+			.textField {
+				width: 80%;
+				margin: 10px 5px !important;
+				background-color: var(--backgroundColor) !important;
+
+				fieldset {
+					border-color: var(--detailsColor) !important;
+				}
+
+				path {
+					color: red;
+				}
+			}
+
+			.message {
+				color: red !important;
+			}
+
+			.signInButton {
+				margin: 10px 0;
+				background-color: var(--detailsColor);
+
+				&:hover {
+					background-color: var(--hoverDetailsColor);
 				}
 			}
 		}
