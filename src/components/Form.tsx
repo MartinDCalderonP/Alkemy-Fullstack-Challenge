@@ -139,7 +139,6 @@ export default function Form({ getMove, refreshMoves }: IFormProps) {
 							name="description"
 							value={move.description}
 							onChange={handleChange}
-							multiline
 						/>
 
 						<TextField
