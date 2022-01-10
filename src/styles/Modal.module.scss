@@ -1,0 +1,56 @@
+.overlay {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: rgba(0, 0, 0, 0.9);
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	z-index: 1000;
+	transition: all 0.3s linear;
+
+	.modal {
+		display: flex;
+		flex-direction: column;
+		transition: all 0.3s linear;
+		background-color: var(--backgroundColor);
+		border: 1px solid var(--detailsColor);
+		border-radius: 5px;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+		padding: 10px;
+
+		&:hover {
+			box-shadow: 0 12px 20px rgba(0, 0, 0, 0.6);
+			border-color: var(--hoverDetailsColor);
+		}
+
+		.closeIcon {
+			margin-left: 20px;
+			font-size: 1.2rem;
+
+			path {
+				fill: var(--detailsColor);
+			}
+
+			&:hover {
+				path {
+					fill: var(--hoverDetailsColor);
+				}
+			}
+		}
+	}
+}
+
+.appearModal {
+	animation: appearModal 0.4s ease-in;
+}
+
+@keyframes appearModal {
+	0% {
+		transform: scale(0);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
