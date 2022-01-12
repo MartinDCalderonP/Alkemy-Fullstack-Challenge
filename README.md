@@ -1,3 +1,23 @@
+# Alkemy Fullstack Challenge
+
+This Alkemy Fullstack Challenge is a transactions manager app made with React and TypeScript with Material UI for some the components and SASS with Modules for more personal styling. It is responsive and is not deployed yet. The backend repo is in: [https://github.com/MartinDCalderonP/Alkemy-Fullstack-Challenge-Backend](https://github.com/MartinDCalderonP/Alkemy-Fullstack-Challenge-Backend)
+
+# Things that are working now
+
+Well, the name is clear, in this app one can create, read, update and delete (CRUD) the transactions. It uses Sweet Alert to confirm deletion and Material UI for the inputs. The last added thing is the login, but the register is not implemented yet.
+
+# Next things to add to the project
+
+Register.
+
+Login and shows the transactions of the user.
+
+Add category to the transactions and show the transactions of the category.
+
+Add order the transactions.
+
+Add search a transaction.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
