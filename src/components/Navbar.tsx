@@ -12,7 +12,7 @@ export default function Navbar() {
 				Home
 			</a>
 
-			<h1>Alkemy Fullstack Challenge</h1>
+			<p>Alkemy Fullstack Challenge</p>
 
 			<SignButtons />
 		</nav>
