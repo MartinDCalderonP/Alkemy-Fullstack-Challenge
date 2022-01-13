@@ -42,11 +42,13 @@ export default function SignButtons() {
 					Swal.fire({
 						text: data.message,
 						icon: 'success',
+						confirmButtonColor: 'darkblue',
 					});
 				} else {
 					Swal.fire({
 						text: data.message,
 						icon: 'error',
+						confirmButtonColor: 'darkblue',
 					});
 				}
 			});
