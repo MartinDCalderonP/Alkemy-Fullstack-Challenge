@@ -1,4 +1,4 @@
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, ReactNode } from 'react';
 
 export interface IFormProps {
 	getMove: number;
@@ -43,4 +43,8 @@ export interface IUserData {
 
 export interface IModalProps {
 	closeModal: Function;
+}
+
+export interface ILayoutProps {
+	children: ReactNode;
 }
