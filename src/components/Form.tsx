@@ -73,17 +73,17 @@ export default function Form({ getMove, refreshMoves }: IFormProps) {
 	const throttledSubmit = useCallback(
 		throttle(() => {
 			if (!move.description || !move.amount) {
-				setMessage('Please fill in all fields');
+				setMessage('Please fill in all fields.');
 				return;
 			}
 
 			if (Number.isNaN(parseInt(move.amount))) {
-				setMessage('Amount must be a number');
+				setMessage('Amount must be a number.');
 				return;
 			}
 
 			if (parseInt(move.amount) <= 0) {
-				setMessage('Amount must be greater than 0');
+				setMessage('Amount must be greater than 0.');
 				return;
 			}
 
