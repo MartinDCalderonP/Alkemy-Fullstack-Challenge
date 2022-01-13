@@ -10,7 +10,7 @@ export default function App() {
 			<Routes>
 				<Route path={Paths.home} element={<Home />} />
 
-				<Route path={Paths.register} element={<SignUp />} />
+				<Route path={Paths.signUp} element={<SignUp />} />
 
 				<Route path="*" element={<Navigate replace to={Paths.home} />} />
 			</Routes>
