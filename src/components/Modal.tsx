@@ -9,6 +9,7 @@ import useLocalStorage from '../hooks/useLocalStorage';
 import CloseIcon from './CloseIcon';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Swal from 'sweetalert2';
 
 export default function Modal({ closeModal }: IModalProps) {
 	const { state, dispatch } = useContextState();
@@ -60,9 +61,7 @@ export default function Modal({ closeModal }: IModalProps) {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				if (data.message) {
-					setMessage(data.message);
-				} else {
+				if (data.status === 'Success') {
 					setUserInStorage(data.user);
 					dispatch({
 						type: 'SET_USER',
@@ -70,6 +69,13 @@ export default function Modal({ closeModal }: IModalProps) {
 							user: data.user,
 						},
 					});
+					Swal.fire({
+						text: data.message,
+						icon: 'success',
+						confirmButtonColor: 'darkblue',
+					});
+				} else {
+					setMessage(data.message);
 				}
 			});
 	};
