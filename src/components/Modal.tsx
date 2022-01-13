@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import { createPortal } from 'react-dom';
-import { Link } from 'react-router-dom';
 import styles from '../styles/Modal.module.scss';
+import { Link } from 'react-router-dom';
 import { useContextState } from '../context/Context';
 import { initialState } from '../context/Reducer';
 import { API, Paths } from '../common/Enums';
