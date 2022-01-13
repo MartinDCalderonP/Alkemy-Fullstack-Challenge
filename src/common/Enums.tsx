@@ -4,3 +4,8 @@ export enum API {
 	auth = '/auth',
 	users = '/users',
 }
+
+export enum Paths {
+	home = '/',
+	signUp = '/sign-up',
+}
