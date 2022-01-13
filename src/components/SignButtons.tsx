@@ -54,6 +54,10 @@ export default function SignButtons() {
 			});
 	};
 
+	const handleCloseModal = () => {
+		setIsModalOpen(false);
+	};
+
 	return (
 		<>
 			{state?.user?.user_id === 0 && (
@@ -70,7 +74,7 @@ export default function SignButtons() {
 				</button>
 			)}
 
-			{isModalOpen && <Modal closeModal={() => setIsModalOpen(false)} />}
+			{isModalOpen && <Modal closeModal={handleCloseModal} />}
 		</>
 	);
 }
