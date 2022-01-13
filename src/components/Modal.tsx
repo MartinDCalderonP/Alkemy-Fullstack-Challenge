@@ -1,9 +1,10 @@
 import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import { createPortal } from 'react-dom';
+import { Link } from 'react-router-dom';
 import styles from '../styles/Modal.module.scss';
 import { useContextState } from '../context/Context';
 import { initialState } from '../context/Reducer';
-import { API } from '../common/Enums';
+import { API, Paths } from '../common/Enums';
 import { IModalProps, IUserData } from '../common/Interfaces';
 import useLocalStorage from '../hooks/useLocalStorage';
 import CloseIcon from './CloseIcon';
@@ -127,6 +128,10 @@ export default function Modal({ closeModal }: IModalProps) {
 					>
 						Sign In
 					</Button>
+
+					<Link className={styles.signUpLink} to={Paths.signUp}>
+						{"Don't have an account? Sign Up"}
+					</Link>
 				</form>
 			</div>
 		</div>,
