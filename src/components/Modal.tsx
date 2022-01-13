@@ -120,7 +120,7 @@ export default function Modal({ closeModal }: IModalProps) {
 						type="submit"
 						onClick={handleSignIn}
 					>
-						Login
+						Sign In
 					</Button>
 				</form>
 			</div>
