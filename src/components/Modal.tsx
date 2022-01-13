@@ -44,6 +44,11 @@ export default function Modal({ closeModal }: IModalProps) {
 	const handleSignIn = (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 
+		if (userToSignIn.email === '' || userToSignIn.password === '') {
+			setMessage('Please fill in all fields.');
+			return;
+		}
+
 		const fetchUrl = `${API.base}${API.auth}${API.users}`;
 
 		const body = {
