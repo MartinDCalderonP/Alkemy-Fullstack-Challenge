@@ -11,15 +11,24 @@
 	box-sizing: border-box;
 	text-align: center;
 
-	.homeAnchor {
+	.navLink {
 		text-decoration: none;
-		color: var(--detailsColor);
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
 
 		.homeIcon {
 			margin: 0 10px;
+		}
+	}
 
+	.navLinkActive {
+		color: var(--hoverDetailsColor);
+
+		.homeIcon {
 			path {
-				fill: var(--detailsColor);
+				fill: var(--hoverDetailsColor);
 			}
 		}
 	}
