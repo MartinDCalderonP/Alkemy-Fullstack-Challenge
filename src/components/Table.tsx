@@ -87,6 +87,12 @@ export default function Table({
 							</td>
 						</tr>
 					))}
+
+					{moves.length === 0 && (
+						<tr>
+							<td colSpan={5}>No moves found</td>
+						</tr>
+					)}
 				</tbody>
 			</table>
 		</div>
