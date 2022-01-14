@@ -5,10 +5,11 @@ import React, {
 	ChangeEvent,
 	MouseEvent,
 } from 'react';
-import styles from '../styles/Form.module.scss';
+import styles from '../styles/MovesForm.module.scss';
 import { throttle } from 'lodash';
 import { API } from '../common/Enums';
 import { IFormProps } from '../common/Interfaces';
+import Input from './Input';
 import Toast from './Toast';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -133,16 +134,14 @@ export default function MovesForm({ getMove, refreshMoves }: IFormProps) {
 			<form className={styles.form}>
 				<Card className={styles.card}>
 					<CardContent className={styles.cardContent}>
-						<TextField
-							className={styles.textField}
+						<Input
 							label="Move Description"
 							name="description"
 							value={move.description}
 							onChange={handleChange}
 						/>
 
-						<TextField
-							className={styles.textField}
+						<Input
 							label="Move Amount"
 							name="amount"
 							value={move.amount}
@@ -151,12 +150,11 @@ export default function MovesForm({ getMove, refreshMoves }: IFormProps) {
 
 						<LocalizationProvider dateAdapter={AdapterDateFns}>
 							<DatePicker
-								className={styles.datePicker}
 								label="Move Date"
 								value={move.date}
 								onChange={handleDateChange}
 								renderInput={(params) => (
-									<TextField className={styles.textField} {...params} />
+									<TextField className={styles.datePickerField} {...params} />
 								)}
 							/>
 						</LocalizationProvider>
