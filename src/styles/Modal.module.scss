@@ -52,31 +52,6 @@
 				}
 			}
 		}
-
-		.form {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			width: 100%;
-
-			.input {
-				width: 80%;
-			}
-
-			.message {
-				color: red !important;
-			}
-
-			.signInButton {
-				margin: 10px 0;
-			}
-
-			.signUpLink {
-				font-size: 0.9rem;
-				margin: 10px 0;
-			}
-		}
 	}
 }
 
