@@ -1,5 +1,6 @@
 .myButton {
 	background-color: var(--detailsColor) !important;
+	transition: all 0.3s linear !important;
 
 	&:hover {
 		background-color: var(--hoverDetailsColor) !important;
