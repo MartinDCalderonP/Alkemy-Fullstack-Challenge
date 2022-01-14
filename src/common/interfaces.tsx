@@ -48,3 +48,7 @@ export interface IModalProps {
 export interface ILayoutProps {
 	children: ReactNode;
 }
+
+export interface ISignFormProps {
+	closeModal: Function;
+}
