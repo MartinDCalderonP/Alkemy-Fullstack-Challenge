@@ -6,29 +6,22 @@ import React, {
 	ReactNode,
 } from 'react';
 import { Context } from '../common/Types';
-import reducer, { initialState } from './Reducer';
+import reducer, { initialUser } from './Reducer';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 const StateContext = createContext<Context>({} as Context);
 
 export function StateProvider({ children }: { children: ReactNode }) {
-	const [storagedState, setStoragedState] = useLocalStorage(
-		'state',
-		initialState
-	);
+	const [storagedUser, setStoragedUser] = useLocalStorage('user', initialUser);
 
-	const [state, dispatch] = useReducer(
-		reducer,
-		initialState,
-		() => storagedState
-	);
+	const [user, dispatch] = useReducer(reducer, initialUser, () => storagedUser);
 
 	useEffect(() => {
-		setStoragedState(state);
-	}, [state]);
+		setStoragedUser(user);
+	}, [user]);
 
 	return (
-		<StateContext.Provider value={{ state, dispatch }}>
+		<StateContext.Provider value={{ user, dispatch }}>
 			{children}
 		</StateContext.Provider>
 	);

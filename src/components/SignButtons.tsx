@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from '../styles/SignButtons.module.scss';
 import { useContextState } from '../context/Context';
-import { initialState } from '../context/Reducer';
+import { initialUser } from '../context/Reducer';
 import { API } from '../common/Enums';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
@@ -9,7 +9,7 @@ import Modal from './Modal';
 import Swal from 'sweetalert2';
 
 export default function SignButtons() {
-	const { state, dispatch } = useContextState();
+	const { user, dispatch } = useContextState();
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const handleOpenModal = () => {
@@ -29,7 +29,7 @@ export default function SignButtons() {
 					dispatch({
 						type: 'SET_USER',
 						payload: {
-							user: initialState.user,
+							...initialUser,
 						},
 					});
 					Swal.fire({
@@ -53,14 +53,14 @@ export default function SignButtons() {
 
 	return (
 		<>
-			{state?.user?.user_id === 0 && (
+			{user?.user_id === 0 && (
 				<button className={styles.signButton} onClick={handleOpenModal}>
 					Sign In
 					<FontAwesomeIcon className={styles.anchorIcon} icon={faSignInAlt} />
 				</button>
 			)}
 
-			{state?.user?.user_id > 0 && (
+			{user?.user_id > 0 && (
 				<button className={styles.signButton} onClick={handleSignOut}>
 					Sign Out
 					<FontAwesomeIcon className={styles.anchorIcon} icon={faSignOutAlt} />

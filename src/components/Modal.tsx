@@ -11,13 +11,13 @@ import CloseIcon from './CloseIcon';
 import Swal from 'sweetalert2';
 
 export default function Modal({ closeModal }: IModalProps) {
-	const { state, dispatch } = useContextState();
+	const { user, dispatch } = useContextState();
 
 	useEffect(() => {
-		if (state.user.user_id > 0) {
-			closeModal();
+		if (user.user_id > 0) {
+			closeModal(true);
 		}
-	}, [state.user.user_id]);
+	}, [user.user_id]);
 
 	const [userToSignIn, setUserToSignIn] = useState({
 		email: '',
@@ -64,7 +64,7 @@ export default function Modal({ closeModal }: IModalProps) {
 					dispatch({
 						type: 'SET_USER',
 						payload: {
-							user: data.user,
+							...data.user,
 						},
 					});
 					Swal.fire({

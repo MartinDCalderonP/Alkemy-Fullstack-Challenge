@@ -2,11 +2,11 @@ import { IUserData } from './Interfaces';
 
 export type Action = {
 	type: string;
-	payload: { user: IUserData };
+	payload: IUserData;
 };
 
 export type Dispatch = (action: Action) => void;
 
-export type State = { user: IUserData };
+export type State = IUserData;
 
-export type Context = { state: State; dispatch: Dispatch };
+export type Context = { user: State; dispatch: Dispatch };
