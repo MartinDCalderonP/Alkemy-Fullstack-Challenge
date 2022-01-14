@@ -1,7 +1,7 @@
 .myButton {
-	background-color: var(--detailsColor);
+	background-color: var(--detailsColor) !important;
 
 	&:hover {
-		background-color: var(--hoverDetailsColor);
+		background-color: var(--hoverDetailsColor) !important;
 	}
 }
