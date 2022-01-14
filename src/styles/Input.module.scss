@@ -1,0 +1,12 @@
+.textField {
+	margin: 10px 5px !important;
+	background-color: var(--backgroundColor) !important;
+
+	fieldset {
+		border-color: var(--detailsColor) !important;
+	}
+
+	path {
+		color: red;
+	}
+}
