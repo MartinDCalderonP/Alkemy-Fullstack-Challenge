@@ -3,9 +3,9 @@ import styles from '../styles/Table.module.scss';
 import { API } from '../common/Enums';
 import { ITableProps, IMove } from '../common/Interfaces';
 import { format } from '../common/Helpers';
-import { Button } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import MyButton from './MyButton';
 import Swal from 'sweetalert2';
 
 export default function Table({
@@ -66,24 +66,24 @@ export default function Table({
 							<td>{'$' + move.move_amount}</td>
 							<td>{format(move.move_date, 'es')}</td>
 							<td>
-								<Button
+								<MyButton
 									className={styles.actionButton}
 									variant="contained"
 									type="submit"
 									onClick={() => handleEditMove(move.move_id)}
 								>
 									<FontAwesomeIcon icon={faEdit} />
-								</Button>
+								</MyButton>
 							</td>
 							<td>
-								<Button
+								<MyButton
 									className={styles.actionButton}
 									variant="contained"
 									type="submit"
 									onClick={() => handleDeleteMove(move.move_id)}
 								>
 									<FontAwesomeIcon icon={faTrashAlt} />
-								</Button>
+								</MyButton>
 							</td>
 						</tr>
 					))}

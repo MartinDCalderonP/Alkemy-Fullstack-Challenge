@@ -10,8 +10,8 @@ import { throttle } from 'lodash';
 import { API } from '../common/Enums';
 import { IFormProps } from '../common/Interfaces';
 import Input from './Input';
+import MyButton from './MyButton';
 import Toast from './Toast';
-import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -192,14 +192,13 @@ export default function MovesForm({ getMove, refreshMoves }: IFormProps) {
 						)}
 					</CardContent>
 					<CardActions className={styles.cardActions}>
-						<Button
-							className={styles.sendButton}
+						<MyButton
 							variant="contained"
 							type="submit"
 							onClick={handleSubmit}
 						>
 							{!move.id ? 'Send' : 'Update'}
-						</Button>
+						</MyButton>
 					</CardActions>
 				</Card>
 			</form>

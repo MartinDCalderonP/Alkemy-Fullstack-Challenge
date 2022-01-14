@@ -48,14 +48,6 @@
 
 		.cardActions {
 			justify-content: center;
-
-			.sendButton {
-				background-color: var(--detailsColor);
-
-				&:hover {
-					background-color: var(--hoverDetailsColor);
-				}
-			}
 		}
 	}
 }

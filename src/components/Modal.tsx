@@ -8,8 +8,8 @@ import { API, Paths } from '../common/Enums';
 import { IModalProps, IUserData } from '../common/Interfaces';
 import useLocalStorage from '../hooks/useLocalStorage';
 import Input from './Input';
+import MyButton from './MyButton';
 import CloseIcon from './CloseIcon';
-import Button from '@mui/material/Button';
 import Swal from 'sweetalert2';
 
 export default function Modal({ closeModal }: IModalProps) {
@@ -120,14 +120,14 @@ export default function Modal({ closeModal }: IModalProps) {
 
 					<div className={styles.message}>{message}</div>
 
-					<Button
+					<MyButton
 						className={styles.signInButton}
 						variant="contained"
 						type="submit"
 						onClick={handleSignIn}
 					>
 						Sign In
-					</Button>
+					</MyButton>
 
 					<Link className={styles.signUpLink} to={Paths.signUp}>
 						{"Don't have an account? Sign Up"}
