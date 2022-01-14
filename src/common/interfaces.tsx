@@ -1,4 +1,4 @@
-import { MouseEventHandler, ReactNode } from 'react';
+import { MouseEventHandler, ReactNode, ReactElement } from 'react';
 
 export interface IFormProps {
 	getMove: number;
@@ -51,4 +51,9 @@ export interface ILayoutProps {
 
 export interface ISignFormProps {
 	closeModal: Function;
+}
+
+export interface IPrivateRouteProps {
+	children: ReactElement;
+	redirectTo: string;
 }
