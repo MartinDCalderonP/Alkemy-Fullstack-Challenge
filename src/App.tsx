@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Paths } from './common/Enums';
+import PublicRoute from './components/PublicRoute';
 import Home from './pages/Home';
-import PrivateRoute from './components/PrivateRoute';
 import SignUp from './pages/SignUp';
 
 export default function App() {
@@ -14,9 +14,9 @@ export default function App() {
 				<Route
 					path={Paths.signUp}
 					element={
-						<PrivateRoute redirectTo={Paths.home}>
+						<PublicRoute redirectTo={Paths.home}>
 							<SignUp />
-						</PrivateRoute>
+						</PublicRoute>
 					}
 				/>
 

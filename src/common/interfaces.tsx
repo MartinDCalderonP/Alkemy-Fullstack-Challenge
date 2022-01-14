@@ -53,7 +53,7 @@ export interface ISignFormProps {
 	closeModal: Function;
 }
 
-export interface IPrivateRouteProps {
+export interface IPublicRouteProps {
 	children: ReactElement;
 	redirectTo: string;
 }
