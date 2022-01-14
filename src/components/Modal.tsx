@@ -3,10 +3,8 @@ import { createPortal } from 'react-dom';
 import styles from '../styles/Modal.module.scss';
 import { Link } from 'react-router-dom';
 import { useContextState } from '../context/Context';
-import { initialState } from '../context/Reducer';
 import { API, Paths } from '../common/Enums';
-import { IModalProps, IUserData } from '../common/Interfaces';
-import useLocalStorage from '../hooks/useLocalStorage';
+import { IModalProps } from '../common/Interfaces';
 import Input from './Input';
 import MyButton from './MyButton';
 import CloseIcon from './CloseIcon';
@@ -20,11 +18,6 @@ export default function Modal({ closeModal }: IModalProps) {
 			closeModal();
 		}
 	}, [state.user.user_id]);
-
-	const [, setUserInStorage] = useLocalStorage<IUserData>(
-		'user',
-		initialState.user
-	);
 
 	const [userToSignIn, setUserToSignIn] = useState({
 		email: '',
@@ -68,7 +61,6 @@ export default function Modal({ closeModal }: IModalProps) {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.status === 'Success') {
-					setUserInStorage(data.user);
 					dispatch({
 						type: 'SET_USER',
 						payload: {

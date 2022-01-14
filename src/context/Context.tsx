@@ -1,20 +1,31 @@
-import React, { createContext, useReducer, useContext, ReactNode } from 'react';
+import React, {
+	createContext,
+	useReducer,
+	useContext,
+	useEffect,
+	ReactNode,
+} from 'react';
 import { Context } from '../common/Types';
 import reducer, { initialState } from './Reducer';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const StateContext = createContext<Context>({} as Context);
 
 export function StateProvider({ children }: { children: ReactNode }) {
-	const storagedUser = window.localStorage.getItem('user');
-
-	const storagedState = {
-		user: storagedUser ? JSON.parse(storagedUser) : initialState.user,
-	};
+	const [storagedState, setStoragedState] = useLocalStorage(
+		'state',
+		initialState
+	);
 
 	const [state, dispatch] = useReducer(
 		reducer,
-		storagedState ? storagedState : initialState
+		initialState,
+		() => storagedState
 	);
+
+	useEffect(() => {
+		setStoragedState(state);
+	}, [state]);
 
 	return (
 		<StateContext.Provider value={{ state, dispatch }}>

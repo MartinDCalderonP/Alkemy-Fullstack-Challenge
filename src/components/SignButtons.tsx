@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import styles from '../styles/SignButtons.module.scss';
 import { useContextState } from '../context/Context';
 import { initialState } from '../context/Reducer';
-import useLocalStorage from '../hooks/useLocalStorage';
 import { API } from '../common/Enums';
-import { IUserData } from '../common/Interfaces';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import Modal from './Modal';
@@ -12,10 +10,6 @@ import Swal from 'sweetalert2';
 
 export default function SignButtons() {
 	const { state, dispatch } = useContextState();
-	const [, setUserInStorage] = useLocalStorage<IUserData>(
-		'user',
-		initialState.user
-	);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const handleOpenModal = () => {
@@ -32,7 +26,6 @@ export default function SignButtons() {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.status === 'Success') {
-					setUserInStorage(initialState.user);
 					dispatch({
 						type: 'SET_USER',
 						payload: {
