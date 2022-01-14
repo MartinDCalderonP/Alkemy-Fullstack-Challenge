@@ -7,8 +7,8 @@ import { initialState } from '../context/Reducer';
 import { API, Paths } from '../common/Enums';
 import { IModalProps, IUserData } from '../common/Interfaces';
 import useLocalStorage from '../hooks/useLocalStorage';
+import Input from './Input';
 import CloseIcon from './CloseIcon';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Swal from 'sweetalert2';
 
@@ -101,16 +101,16 @@ export default function Modal({ closeModal }: IModalProps) {
 				<form className={styles.form}>
 					<h2>Sign In</h2>
 
-					<TextField
-						className={styles.textField}
+					<Input
+						className={styles.input}
 						label="User Email"
 						name="email"
 						value={userToSignIn.email}
 						onChange={handleChange}
 					/>
 
-					<TextField
-						className={styles.textField}
+					<Input
+						className={styles.input}
 						label="User Password"
 						name="password"
 						value={userToSignIn.password}

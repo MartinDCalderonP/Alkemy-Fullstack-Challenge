@@ -60,18 +60,8 @@
 			justify-content: center;
 			width: 100%;
 
-			.textField {
+			.input {
 				width: 80%;
-				margin: 10px 5px !important;
-				background-color: var(--backgroundColor) !important;
-
-				fieldset {
-					border-color: var(--detailsColor) !important;
-				}
-
-				path {
-					color: red;
-				}
 			}
 
 			.message {
