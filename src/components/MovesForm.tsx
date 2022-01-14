@@ -24,7 +24,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
-export default function Form({ getMove, refreshMoves }: IFormProps) {
+export default function MovesForm({ getMove, refreshMoves }: IFormProps) {
 	const [move, setMove] = useState({
 		id: '',
 		description: '',

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Layout from '../components/Layout';
-import Form from '../components/Form';
+import MovesForm from '../components/MovesForm';
 import TablesContainer from '../components/TablesContainer';
 
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
 
 	return (
 		<Layout>
-			<Form getMove={getMove} refreshMoves={onRefreshMoves} />
+			<MovesForm getMove={getMove} refreshMoves={onRefreshMoves} />
 			<TablesContainer getMove={onGetMove} refreshMoves={refreshMoves} />
 		</Layout>
 	);
