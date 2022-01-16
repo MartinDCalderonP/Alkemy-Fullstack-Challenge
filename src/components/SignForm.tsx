@@ -12,7 +12,7 @@ export default function SignForm({ closeModal }: ISignFormProps) {
 	const { user, dispatch } = useContextState();
 
 	useEffect(() => {
-		if (user.user_id) {
+		if (closeModal && user.user_id) {
 			closeModal(true);
 		}
 	}, [user]);
