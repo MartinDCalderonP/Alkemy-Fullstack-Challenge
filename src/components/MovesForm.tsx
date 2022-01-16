@@ -9,12 +9,10 @@ import styles from '../styles/MovesForm.module.scss';
 import { throttle } from 'lodash';
 import { API } from '../common/Enums';
 import { IFormProps } from '../common/Interfaces';
+import FormCard from './FormCard';
 import Input from './Input';
 import MyButton from './MyButton';
 import Toast from './Toast';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -130,80 +128,73 @@ export default function MovesForm({ getMove, refreshMoves }: IFormProps) {
 	};
 
 	return (
-		<>
+		<FormCard>
 			<form className={styles.form}>
-				<Card className={styles.card}>
-					<CardContent className={styles.cardContent}>
-						<Input
-							label="Move Description"
-							name="description"
-							value={move.description}
-							onChange={handleChange}
-						/>
+				<Input
+					label="Move Description"
+					name="description"
+					value={move.description}
+					onChange={handleChange}
+				/>
 
-						<Input
-							label="Move Amount"
-							name="amount"
-							value={move.amount}
-							onChange={handleChange}
-						/>
+				<Input
+					label="Move Amount"
+					name="amount"
+					value={move.amount}
+					onChange={handleChange}
+				/>
 
-						<LocalizationProvider dateAdapter={AdapterDateFns}>
-							<DatePicker
-								label="Move Date"
-								value={move.date}
-								onChange={handleDateChange}
-								renderInput={(params) => (
-									<TextField className={styles.datePickerField} {...params} />
-								)}
-							/>
-						</LocalizationProvider>
-
-						<FormControl className={styles.formControl} component="fieldset">
-							<FormLabel component="legend">Move Type</FormLabel>
-							<RadioGroup
-								aria-label="type"
-								defaultValue="income"
-								name="type"
-								value={move.type}
-								onChange={handleChange}
-								row
-							>
-								<FormControlLabel
-									value="income"
-									control={<Radio />}
-									label="Income"
-									{...(move.id && { disabled: true })}
-								/>
-
-								<FormControlLabel
-									value="outcome"
-									control={<Radio />}
-									label="Outcome"
-									{...(move.id && { disabled: true })}
-								/>
-							</RadioGroup>
-						</FormControl>
-
-						{move.id && (
-							<p className={styles.radioWarning}>
-								{'You can\'t change the move type'}.
-							</p>
+				<LocalizationProvider dateAdapter={AdapterDateFns}>
+					<DatePicker
+						label="Move Date"
+						value={move.date}
+						onChange={handleDateChange}
+						renderInput={(params) => (
+							<TextField className={styles.datePickerField} {...params} />
 						)}
-					</CardContent>
-					<CardActions className={styles.cardActions}>
-						<MyButton
-							variant="contained"
-							type="submit"
-							onClick={handleSubmit}
-						>
-							{!move.id ? 'Send' : 'Update'}
-						</MyButton>
-					</CardActions>
-				</Card>
+					/>
+				</LocalizationProvider>
+
+				<FormControl className={styles.formControl} component="fieldset">
+					<FormLabel component="legend">Move Type</FormLabel>
+					<RadioGroup
+						aria-label="type"
+						defaultValue="income"
+						name="type"
+						value={move.type}
+						onChange={handleChange}
+						row
+					>
+						<FormControlLabel
+							value="income"
+							control={<Radio />}
+							label="Income"
+							{...(move.id && { disabled: true })}
+						/>
+
+						<FormControlLabel
+							value="outcome"
+							control={<Radio />}
+							label="Outcome"
+							{...(move.id && { disabled: true })}
+						/>
+					</RadioGroup>
+				</FormControl>
+
+				{move.id && (
+					<p className={styles.radioWarning}>
+						{"You can't change the move type"}.
+					</p>
+				)}
+
+				<div className={styles.buttonContainer}>
+					<MyButton variant="contained" type="submit" onClick={handleSubmit}>
+						{!move.id ? 'Send' : 'Update'}
+					</MyButton>
+				</div>
 			</form>
 
 			{message && <Toast message={message} closeToast={handleCloseToast} />}
-		</>
+		</FormCard>
 	);
 }
