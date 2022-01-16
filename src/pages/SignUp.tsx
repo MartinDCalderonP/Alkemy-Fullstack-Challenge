@@ -7,7 +7,7 @@ export default function SignUp() {
 	return (
 		<Layout>
 			<FormCard>
-				<SignForm />
+				<SignForm type="signUp" />
 			</FormCard>
 		</Layout>
 	);

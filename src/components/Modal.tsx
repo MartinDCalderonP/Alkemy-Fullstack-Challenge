@@ -15,7 +15,7 @@ export default function Modal({ closeModal }: IModalProps) {
 			<div className={`${styles.modal} ${styles.appearModal}`}>
 				<CloseIcon className={styles.closeIcon} onClick={handleCloseModal} />
 
-				<SignForm closeModal={handleCloseModal} />
+				<SignForm closeModal={handleCloseModal} type="signIn" />
 			</div>
 		</div>,
 		document.getElementById('portal') as Element

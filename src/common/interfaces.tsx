@@ -51,6 +51,7 @@ export interface ILayoutProps {
 
 export interface ISignFormProps {
 	closeModal?: Function;
+	type: string;
 }
 
 export interface IPublicRouteProps {
