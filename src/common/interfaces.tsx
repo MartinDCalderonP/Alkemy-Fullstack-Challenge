@@ -57,3 +57,7 @@ export interface IPublicRouteProps {
 	children: ReactElement;
 	redirectTo: string;
 }
+
+export interface ICardProps {
+	children: ReactNode;
+}
