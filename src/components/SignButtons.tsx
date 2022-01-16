@@ -4,7 +4,11 @@ import { useContextState } from '../context/Context';
 import { initialUser } from '../context/Reducer';
 import { API } from '../common/Enums';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+	faSignInAlt,
+	faUserCircle,
+	faSignOutAlt,
+} from '@fortawesome/free-solid-svg-icons';
 import Modal from './Modal';
 import Swal from 'sweetalert2';
 
@@ -52,7 +56,7 @@ export default function SignButtons() {
 	};
 
 	return (
-		<>
+		<div className={styles.container}>
 			{user?.user_id === 0 && (
 				<button className={styles.signButton} onClick={handleOpenModal}>
 					Sign In
@@ -61,13 +65,25 @@ export default function SignButtons() {
 			)}
 
 			{user?.user_id > 0 && (
-				<button className={styles.signButton} onClick={handleSignOut}>
-					Sign Out
-					<FontAwesomeIcon className={styles.anchorIcon} icon={faSignOutAlt} />
-				</button>
+				<>
+					<button className={styles.signButton}>
+						<FontAwesomeIcon
+							className={styles.anchorIcon}
+							icon={faUserCircle}
+						/>
+					</button>
+
+					<button className={styles.signButton} onClick={handleSignOut}>
+						Sign Out
+						<FontAwesomeIcon
+							className={styles.anchorIcon}
+							icon={faSignOutAlt}
+						/>
+					</button>
+				</>
 			)}
 
 			{isModalOpen && <Modal closeModal={handleCloseModal} />}
-		</>
+		</div>
 	);
 }
