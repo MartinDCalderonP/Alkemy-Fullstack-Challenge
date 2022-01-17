@@ -9,7 +9,7 @@ export default function PublicRoute({
 }: IPublicRouteProps) {
 	const { user } = useContextState();
 
-	const isAuthenticated = user.user_id > 0 ? false : true;
+	const isAuthenticated = user.user_id > 0 ? true : false;
 
-	return isAuthenticated ? children : <Navigate to={redirectTo} />;
+	return isAuthenticated ? <Navigate to={redirectTo} /> : children;
 }
