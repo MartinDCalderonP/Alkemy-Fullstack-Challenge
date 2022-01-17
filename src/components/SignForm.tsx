@@ -41,6 +41,16 @@ export default function SignForm({ toggleModal, type }: ISignFormProps) {
 			return;
 		}
 
+		if (!userToSign.email.match(/\S+@\S+\.\S+/)) {
+			setMessage('Please enter a valid email.');
+			return;
+		}
+
+		if (userToSign.password.length < 8) {
+			setMessage('Password must be at least 8 characters.');
+			return;
+		}
+
 		const fetchUrl =
 			type === 'signIn'
 				? `${API.base}${API.auth}${API.users}`
