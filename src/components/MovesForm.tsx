@@ -69,23 +69,22 @@ export default function MovesForm({ getMove, refreshMoves }: IFormProps) {
 		}
 	};
 
+	const validateFields = () => {
+		if (move.description === '' || move.amount === '') {
+			setMessage('Please fill in all fields.');
+			return;
+		}
+
+		if (move.amount.match(/[^0-9.]/)) {
+			setMessage('Please enter a valid amount.');
+			return;
+		}
+
+		return true;
+	};
+
 	const throttledSubmit = useCallback(
 		throttle(() => {
-			if (!move.description || !move.amount) {
-				setMessage('Please fill in all fields.');
-				return;
-			}
-
-			if (Number.isNaN(parseInt(move.amount))) {
-				setMessage('Amount must be a number.');
-				return;
-			}
-
-			if (parseInt(move.amount) <= 0) {
-				setMessage('Amount must be greater than 0.');
-				return;
-			}
-
 			const fetchURL = !move.id
 				? `${API.base}${API.moves}`
 				: `${API.base}${API.moves}/${move.id}`;
@@ -119,6 +118,10 @@ export default function MovesForm({ getMove, refreshMoves }: IFormProps) {
 
 	const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
+
+		if (!validateFields()) {
+			return;
+		}
 
 		throttledSubmit();
 	};
