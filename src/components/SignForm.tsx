@@ -18,6 +18,7 @@ export default function SignForm({ toggleModal, type }: ISignFormProps) {
 	}, [user]);
 
 	const [userToSign, setUserToSign] = useState({
+		name: '',
 		email: '',
 		password: '',
 	});
@@ -34,12 +35,25 @@ export default function SignForm({ toggleModal, type }: ISignFormProps) {
 	const [message, setMessage] = useState('');
 
 	const validateFields = () => {
+		const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/;
+		const emailRegex = /\S+@\S+\.\S+/;
+
+		if (type === 'signUp' && !userToSign.name.match(nameRegex)) {
+			setMessage('Name must be only letters.');
+			return;
+		}
+
+		if (type === 'signUp' && userToSign.name === '') {
+			setMessage('Name is required.');
+			return;
+		}
+
 		if (userToSign.email === '' || userToSign.password === '') {
 			setMessage('Please fill in all fields.');
 			return;
 		}
 
-		if (!userToSign.email.match(/\S+@\S+\.\S+/)) {
+		if (!userToSign.email.match(emailRegex)) {
 			setMessage('Please enter a valid email.');
 			return;
 		}
@@ -101,6 +115,16 @@ export default function SignForm({ toggleModal, type }: ISignFormProps) {
 	return (
 		<form className={styles.signForm}>
 			<h2>Sign {type === 'signIn' ? 'In' : 'Up'}</h2>
+
+			{type === 'signUp' && (
+				<Input
+					className={styles.input}
+					label="User Name"
+					name="name"
+					value={userToSign.name}
+					onChange={handleChange}
+				/>
+			)}
 
 			<Input
 				className={styles.input}
