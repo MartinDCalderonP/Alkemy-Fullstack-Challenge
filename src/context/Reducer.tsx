@@ -2,6 +2,7 @@ import { Action, State } from '../common/Types';
 
 export const initialUser = {
 	user_id: 0,
+	user_name: '',
 	user_email: '',
 	user_password: '',
 };
