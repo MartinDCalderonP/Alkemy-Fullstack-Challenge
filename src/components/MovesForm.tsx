@@ -158,7 +158,12 @@ export default function MovesForm({ getMoveById, refreshMoves }: IFormProps) {
 					/>
 				</LocalizationProvider>
 
-				<FormControl className={styles.formControl} component="fieldset">
+				<FormControl
+					className={
+						styles.formControl + (move.id ? ` ${styles.disabled}` : '')
+					}
+					component="fieldset"
+				>
 					<FormLabel component="legend">Move Type</FormLabel>
 					<RadioGroup
 						aria-label="type"

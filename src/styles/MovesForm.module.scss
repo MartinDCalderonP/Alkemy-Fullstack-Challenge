@@ -25,6 +25,10 @@
 
 	.formControl {
 		margin: 5px 10px !important;
+
+		&.disabled {
+			opacity: 0.5;
+		}
 	}
 
 	.radioWarning {
