@@ -1,18 +1,18 @@
 import { MouseEventHandler, ReactNode, ReactElement } from 'react';
 
 export interface IFormProps {
-	getMove: number;
+	getMoveById: number;
 	refreshMoves: Function;
 }
 
 export interface ITablesContainerProps {
-	getMove: (moveId: number) => void;
+	getMoveById: (moveId: number) => void;
 	refreshMoves: number;
 }
 
 export interface ITableProps {
 	moves: IMove[];
-	getMove: (moveId: number) => void;
+	getMoveById: (moveId: number) => void;
 	message: (message: string) => void;
 	refreshMoves: Function;
 }

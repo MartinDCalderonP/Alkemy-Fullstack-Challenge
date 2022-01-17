@@ -23,7 +23,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
-export default function MovesForm({ getMove, refreshMoves }: IFormProps) {
+export default function MovesForm({ getMoveById, refreshMoves }: IFormProps) {
 	const [move, setMove] = useState({
 		id: '',
 		description: '',
@@ -35,8 +35,8 @@ export default function MovesForm({ getMove, refreshMoves }: IFormProps) {
 	const [message, setMessage] = useState('');
 
 	useEffect(() => {
-		if (getMove) {
-			fetch(`${API.base}${API.moves}/${getMove}`)
+		if (getMoveById) {
+			fetch(`${API.base}${API.moves}/${getMoveById}`)
 				.then((res) => res.json())
 				.then((data) => {
 					setMove({
@@ -49,7 +49,7 @@ export default function MovesForm({ getMove, refreshMoves }: IFormProps) {
 				})
 				.catch((err) => setMessage(err));
 		}
-	}, [getMove]);
+	}, [getMoveById]);
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;

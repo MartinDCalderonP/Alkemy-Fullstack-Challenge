@@ -9,7 +9,7 @@ export default function Home() {
 
 	const isAuthenticated = user.user_id > 0 ? true : false;
 
-	const [getMove, setGetMove] = useState(0);
+	const [getMoveById, setGetMove] = useState(0);
 	const [refreshMoves, setRefreshMoves] = useState(0);
 
 	const onGetMove = (moveId: number) => {
@@ -22,10 +22,10 @@ export default function Home() {
 
 	return (
 		<Layout>
-			<MovesForm getMove={getMove} refreshMoves={onRefreshMoves} />
+			<MovesForm getMoveById={getMoveById} refreshMoves={onRefreshMoves} />
 
 			{isAuthenticated && (
-				<TablesContainer getMove={onGetMove} refreshMoves={refreshMoves} />
+				<TablesContainer getMoveById={onGetMove} refreshMoves={refreshMoves} />
 			)}
 		</Layout>
 	);

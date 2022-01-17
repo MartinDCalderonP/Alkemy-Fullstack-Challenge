@@ -6,7 +6,7 @@ import Table from './Table';
 import Toast from './Toast';
 
 export default function TablesContainer({
-	getMove,
+	getMoveById,
 	refreshMoves,
 }: ITablesContainerProps) {
 	const fetchUrl = `${API.base}${API.moves}`;
@@ -46,7 +46,7 @@ export default function TablesContainer({
 					<h2>Incomes</h2>
 					<Table
 						moves={incomes}
-						getMove={getMove}
+						getMoveById={getMoveById}
 						message={handleTableMessage}
 						refreshMoves={handleRefreshMoves}
 					/>
@@ -58,7 +58,7 @@ export default function TablesContainer({
 					<h2>Outcomes</h2>
 					<Table
 						moves={outcomes}
-						getMove={getMove}
+						getMoveById={getMoveById}
 						message={handleTableMessage}
 						refreshMoves={handleRefreshMoves}
 					/>
