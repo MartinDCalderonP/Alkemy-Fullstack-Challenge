@@ -36,7 +36,7 @@ export default function MovesForm({ getMoveById, refreshMoves }: IFormProps) {
 
 	useEffect(() => {
 		if (getMoveById) {
-			fetch(`${API.base}${API.moves}/${getMoveById}`)
+			fetch(`${API.base}${API.moves}${API.byMoveId}/${getMoveById}`)
 				.then((res) => res.json())
 				.then((data) => {
 					setMove({
