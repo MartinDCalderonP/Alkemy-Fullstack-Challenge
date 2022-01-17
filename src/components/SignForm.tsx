@@ -33,9 +33,7 @@ export default function SignForm({ toggleModal, type }: ISignFormProps) {
 
 	const [message, setMessage] = useState('');
 
-	const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
-		e.preventDefault();
-
+	const validateFields = () => {
 		if (userToSign.email === '' || userToSign.password === '') {
 			setMessage('Please fill in all fields.');
 			return;
@@ -48,6 +46,16 @@ export default function SignForm({ toggleModal, type }: ISignFormProps) {
 
 		if (userToSign.password.length < 8) {
 			setMessage('Password must be at least 8 characters.');
+			return;
+		}
+
+		return true;
+	};
+
+	const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+
+		if (!validateFields()) {
 			return;
 		}
 
