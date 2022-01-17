@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import styles from '../styles/SignForm.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { API, Paths } from '../common/Enums';
 import { ISignFormProps } from '../common/Interfaces';
 import { useContextState } from '../context/Context';
@@ -8,7 +8,7 @@ import Input from './Input';
 import MyButton from './MyButton';
 import Swal from 'sweetalert2';
 
-export default function SignForm({ closeModal }: ISignFormProps) {
+export default function SignForm({ closeModal, type }: ISignFormProps) {
 	const { user, dispatch } = useContextState();
 
 	useEffect(() => {
@@ -17,7 +17,7 @@ export default function SignForm({ closeModal }: ISignFormProps) {
 		}
 	}, [user]);
 
-	const [userToSignIn, setUserToSignIn] = useState({
+	const [userToSign, setUserToSign] = useState({
 		email: '',
 		password: '',
 	});
@@ -25,31 +25,31 @@ export default function SignForm({ closeModal }: ISignFormProps) {
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 
-		setUserToSignIn({
-			...userToSignIn,
+		setUserToSign({
+			...userToSign,
 			[name]: value,
 		});
 	};
 
-	const handleSignIn = (e: MouseEvent<HTMLButtonElement>) => {
+	const [message, setMessage] = useState('');
+
+	const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 
-		if (userToSignIn.email === '' || userToSignIn.password === '') {
+		if (userToSign.email === '' || userToSign.password === '') {
 			setMessage('Please fill in all fields.');
 			return;
 		}
 
-		const fetchUrl = `${API.base}${API.auth}${API.users}`;
-
-		const body = {
-			email: userToSignIn.email,
-			password: userToSignIn.password,
-		};
+		const fetchUrl =
+			type === 'signIn'
+				? `${API.base}${API.auth}${API.users}`
+				: `${API.base}${API.signUp}${API.users}`;
 
 		fetch(fetchUrl, {
 			method: 'POST',
 			credentials: 'include',
-			body: JSON.stringify(body),
+			body: JSON.stringify(userToSign),
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -74,17 +74,21 @@ export default function SignForm({ closeModal }: ISignFormProps) {
 			});
 	};
 
-	const [message, setMessage] = useState('');
+	const { pathname } = useLocation();
+
+	const handleToggleModal = () => {
+		closeModal(true);
+	};
 
 	return (
 		<form className={styles.signForm}>
-			<h2>Sign In</h2>
+			<h2>Sign {type === 'signIn' ? 'In' : 'Up'}</h2>
 
 			<Input
 				className={styles.input}
 				label="User Email"
 				name="email"
-				value={userToSignIn.email}
+				value={userToSign.email}
 				onChange={handleChange}
 			/>
 
@@ -92,7 +96,7 @@ export default function SignForm({ closeModal }: ISignFormProps) {
 				className={styles.input}
 				label="User Password"
 				name="password"
-				value={userToSignIn.password}
+				value={userToSign.password}
 				onChange={handleChange}
 				type="password"
 			/>
@@ -100,17 +104,31 @@ export default function SignForm({ closeModal }: ISignFormProps) {
 			<div className={styles.message}>{message}</div>
 
 			<MyButton
-				className={styles.signInButton}
+				className={styles.signButton}
 				variant="contained"
 				type="submit"
-				onClick={handleSignIn}
+				onClick={handleSubmit}
 			>
-				Sign In
+				Sign {type === 'signIn' ? 'In' : 'Up'}
 			</MyButton>
 
-			<Link className={styles.signUpLink} to={Paths.signUp}>
-				{"Don't have an account? Sign Up"}
-			</Link>
+			{type === 'signIn' && pathname !== '/sign-up' && (
+				<Link className={styles.signLink} to={Paths.signUp}>
+					{"Don't have an account? Sign Up"}
+				</Link>
+			)}
+
+			{type === 'signIn' && pathname === '/sign-up' && (
+				<a className={styles.signLink} href="#" onClick={handleToggleModal}>
+					{"Don't have an account? Sign Up"}
+				</a>
+			)}
+
+			{type === 'signUp' && (
+				<a className={styles.signLink} href="#" onClick={handleToggleModal}>
+					Already have an account? Sign In
+				</a>
+			)}
 		</form>
 	);
 }
