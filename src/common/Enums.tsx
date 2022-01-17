@@ -1,6 +1,7 @@
 export enum API {
 	base = 'http://localhost:8888',
 	moves = '/moves',
+	byUserId = '/by-user-id',
 	auth = '/auth',
 	signUp = '/sign-up',
 	users = '/users',
