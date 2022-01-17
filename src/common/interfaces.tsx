@@ -42,7 +42,7 @@ export interface IUserData {
 }
 
 export interface IModalProps {
-	closeModal: Function;
+	toggleModal: Function;
 }
 
 export interface ILayoutProps {
@@ -50,7 +50,7 @@ export interface ILayoutProps {
 }
 
 export interface ISignFormProps {
-	closeModal?: Function;
+	toggleModal: Function;
 	type: string;
 }
 

@@ -8,12 +8,12 @@ import Input from './Input';
 import MyButton from './MyButton';
 import Swal from 'sweetalert2';
 
-export default function SignForm({ closeModal, type }: ISignFormProps) {
+export default function SignForm({ toggleModal, type }: ISignFormProps) {
 	const { user, dispatch } = useContextState();
 
 	useEffect(() => {
-		if (closeModal && user.user_id) {
-			closeModal(true);
+		if (toggleModal && user.user_id) {
+			toggleModal(true);
 		}
 	}, [user]);
 
@@ -77,7 +77,7 @@ export default function SignForm({ closeModal, type }: ISignFormProps) {
 	const { pathname } = useLocation();
 
 	const handleToggleModal = () => {
-		closeModal(true);
+		toggleModal(true);
 	};
 
 	return (

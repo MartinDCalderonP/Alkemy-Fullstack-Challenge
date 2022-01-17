@@ -16,8 +16,8 @@ export default function SignButtons() {
 	const { user, dispatch } = useContextState();
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
-	const handleOpenModal = () => {
-		setIsModalOpen(true);
+	const handleToggleModal = () => {
+		setIsModalOpen(!isModalOpen);
 	};
 
 	const handleSignOut = () => {
@@ -51,39 +51,37 @@ export default function SignButtons() {
 			});
 	};
 
-	const handleCloseModal = () => {
-		setIsModalOpen(false);
-	};
-
 	return (
-		<div className={styles.container}>
-			{user?.user_id === 0 && (
-				<button className={styles.signButton} onClick={handleOpenModal}>
-					Sign In
-					<FontAwesomeIcon className={styles.anchorIcon} icon={faSignInAlt} />
-				</button>
-			)}
-
-			{user?.user_id > 0 && (
-				<>
-					<button className={styles.signButton}>
-						<FontAwesomeIcon
-							className={styles.anchorIcon}
-							icon={faUserCircle}
-						/>
+		<>
+			<div className={styles.container}>
+				{user?.user_id === 0 && (
+					<button className={styles.signButton} onClick={handleToggleModal}>
+						Sign In
+						<FontAwesomeIcon className={styles.anchorIcon} icon={faSignInAlt} />
 					</button>
+				)}
 
-					<button className={styles.signButton} onClick={handleSignOut}>
-						Sign Out
-						<FontAwesomeIcon
-							className={styles.anchorIcon}
-							icon={faSignOutAlt}
-						/>
-					</button>
-				</>
-			)}
+				{user?.user_id > 0 && (
+					<>
+						<button className={styles.signButton}>
+							<FontAwesomeIcon
+								className={styles.anchorIcon}
+								icon={faUserCircle}
+							/>
+						</button>
 
-			{isModalOpen && <Modal closeModal={handleCloseModal} />}
-		</div>
+						<button className={styles.signButton} onClick={handleSignOut}>
+							Sign Out
+							<FontAwesomeIcon
+								className={styles.anchorIcon}
+								icon={faSignOutAlt}
+							/>
+						</button>
+					</>
+				)}
+			</div>
+
+			{isModalOpen && <Modal toggleModal={handleToggleModal} />}
+		</>
 	);
 }
