@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/TablesContainer.module.scss';
+import { ITablesContainerProps, IMove } from '../common/Interfaces';
 import { API } from '../common/Enums';
 import Table from './Table';
 import Toast from './Toast';
-import { ITablesContainerProps, IMove } from '../common/Interfaces';
 
 export default function TablesContainer({
 	getMove,
