@@ -64,6 +64,7 @@ export default function SignButtons() {
 				{user?.user_id > 0 && (
 					<>
 						<button className={styles.signButton}>
+							{user.user_name}
 							<FontAwesomeIcon
 								className={styles.anchorIcon}
 								icon={faUserCircle}
