@@ -68,3 +68,7 @@ export interface IPrivateRouteProps {
 export interface ICardProps {
 	children: ReactNode;
 }
+
+export interface IDropdownProps {
+	toggleDropdown: Function;
+}
