@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from '../styles/Table.module.scss';
+import { useContextState } from '../context/Context';
 import { API } from '../common/Enums';
 import { ITableProps, IMove } from '../common/Interfaces';
 import { format } from '../common/Helpers';
@@ -14,6 +15,8 @@ export default function Table({
 	message,
 	refreshMoves,
 }: ITableProps) {
+	const { user } = useContextState();
+
 	const handleEditMove = (moveId: number) => {
 		getMoveById(moveId);
 	};
@@ -30,8 +33,13 @@ export default function Table({
 			reverseButtons: true,
 		}).then((result) => {
 			if (result.isConfirmed) {
+				const body = {
+					userId: user.user_id,
+				};
+
 				fetch(`${API.base}${API.moves}/${moveId}`, {
 					method: 'DELETE',
+					body: JSON.stringify(body),
 					headers: {
 						Accept: 'application/json',
 						'Content-Type': 'application/json',
