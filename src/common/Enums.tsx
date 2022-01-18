@@ -10,5 +10,6 @@ export enum API {
 
 export enum Paths {
 	home = '/',
+	moves = '/moves',
 	signUp = '/sign-up',
 }
