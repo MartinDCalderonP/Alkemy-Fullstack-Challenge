@@ -96,9 +96,14 @@ export default function MovesForm({ getMoveById, refreshMoves }: IFormProps) {
 
 			const fetchMethod = !move.id ? 'POST' : 'PUT';
 
+			const body = {
+				...move,
+				userId: user.user_id,
+			};
+
 			fetch(fetchURL, {
 				method: fetchMethod,
-				body: JSON.stringify(move),
+				body: JSON.stringify(body),
 				headers: {
 					Accept: 'application/json',
 					'Content-Type': 'application/json',
