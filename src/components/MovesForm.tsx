@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 import styles from '../styles/MovesForm.module.scss';
 import { throttle } from 'lodash';
+import { useContextState } from '../context/Context';
 import { API } from '../common/Enums';
 import { IFormProps } from '../common/Interfaces';
 import FormCard from './FormCard';
@@ -24,6 +25,8 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
 export default function MovesForm({ getMoveById, refreshMoves }: IFormProps) {
+	const { user } = useContextState();
+
 	const [move, setMove] = useState({
 		id: '',
 		description: '',
@@ -35,8 +38,10 @@ export default function MovesForm({ getMoveById, refreshMoves }: IFormProps) {
 	const [message, setMessage] = useState('');
 
 	useEffect(() => {
+		const fetchUrl = `${API.base}${API.moves}${API.byMoveId}/${user.user_id}/${getMoveById}`;
+
 		if (getMoveById) {
-			fetch(`${API.base}${API.moves}${API.byMoveId}/${getMoveById}`)
+			fetch(fetchUrl)
 				.then((res) => res.json())
 				.then((data) => {
 					setMove({
