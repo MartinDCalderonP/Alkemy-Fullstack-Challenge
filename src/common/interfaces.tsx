@@ -60,6 +60,11 @@ export interface IPublicRouteProps {
 	redirectTo: string;
 }
 
+export interface IPrivateRouteProps {
+	children: ReactElement;
+	redirectTo: string;
+}
+
 export interface ICardProps {
 	children: ReactNode;
 }
