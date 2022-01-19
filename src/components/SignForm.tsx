@@ -114,7 +114,7 @@ export default function SignForm({ toggleModal, type }: ISignFormProps) {
 
 	return (
 		<form className={styles.signForm}>
-			<h2>Sign {type === 'signIn' ? 'In' : 'Up'}</h2>
+			<h1 className={styles.title}>Sign {type === 'signIn' ? 'In' : 'Up'}</h1>
 
 			{type === 'signUp' && (
 				<Input
