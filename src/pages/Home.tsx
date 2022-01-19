@@ -7,9 +7,12 @@ export default function Home() {
 		<Layout>
 			<div className={styles.home}>
 				<h1 className={styles.title}>Welcome!</h1>
+
 				<p className={styles.subtitle}>
-					You must be logged in to view your incomes & outcomes in the moves
-					page.
+					<span className={styles.typewriter}>
+						You must be logged in to view your incomes & outcomes in the moves
+						page.
+					</span>
 				</p>
 			</div>
 		</Layout>
