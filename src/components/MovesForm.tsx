@@ -28,7 +28,7 @@ export default function MovesForm({ getMoveById, refreshMoves }: IFormProps) {
 	const { user } = useContextState();
 
 	const [move, setMove] = useState({
-		id: '',
+		id: 0,
 		description: '',
 		amount: '',
 		type: 'income',
@@ -113,7 +113,7 @@ export default function MovesForm({ getMoveById, refreshMoves }: IFormProps) {
 				.then((data) => {
 					setMessage(data.message);
 					setMove({
-						id: '',
+						id: 0,
 						description: '',
 						amount: '',
 						type: 'income',
@@ -199,7 +199,7 @@ export default function MovesForm({ getMoveById, refreshMoves }: IFormProps) {
 					</RadioGroup>
 				</FormControl>
 
-				{move.id && (
+				{move.id > 0 && (
 					<p className={styles.radioWarning}>
 						{"You can't change the move type"}.
 					</p>
