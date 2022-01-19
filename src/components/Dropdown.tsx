@@ -11,9 +11,9 @@ import { faExchangeAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
 
 export default function Dropdown({ toggleDropdown }: IDropdownProps) {
-	const { user, dispatch } = useContextState();
-	console.log(user);
 	const ref = useRef(null);
+	
+	const { dispatch } = useContextState();
 
 	const handleToggleDropdown = () => {
 		toggleDropdown();
