@@ -1,0 +1,43 @@
+.dropdown {
+	position: absolute;
+	top: 50px;
+	right: 25px;
+	z-index: 900;
+	background-color: var(--innerBackgroundColor);
+	border: 1px solid var(--detailsColor);
+	border-radius: 5px;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+	transition: all 0.3s linear;
+
+	.list {
+		list-style: none;
+
+		.listItem {
+			cursor: pointer;
+			transition: all 0.3s linear;
+
+			&:hover {
+				background-color: var(--hoverDetailsColor);
+			}
+
+			.movesAnchor,
+			.signOutButton {
+				display: flex;
+				align-items: center;
+				font-size: 1rem;
+				padding: 10px 20px;
+				text-decoration: none;
+
+				svg {
+					margin-right: 10px;
+				}
+			}
+
+			.signOutButton {
+				border: none;
+				cursor: pointer;
+				background-color: inherit;
+			}
+		}
+	}
+}
