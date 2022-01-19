@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import styles from '../styles/SignForm.module.scss';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { API, Paths } from '../common/Enums';
 import { ISignFormProps } from '../common/Interfaces';
 import { useContextState } from '../context/Context';
@@ -9,19 +9,23 @@ import MyButton from './MyButton';
 import Swal from 'sweetalert2';
 
 export default function SignForm({ toggleModal, type }: ISignFormProps) {
-	const { user, dispatch } = useContextState();
+	const navigate = useNavigate();
 
-	useEffect(() => {
-		if (toggleModal && user.user_id) {
-			toggleModal(true);
-		}
-	}, [user]);
+	const { user, dispatch } = useContextState();
 
 	const [userToSign, setUserToSign] = useState({
 		name: '',
 		email: '',
 		password: '',
 	});
+
+	const [message, setMessage] = useState('');
+
+	useEffect(() => {
+		if (toggleModal && user.user_id) {
+			toggleModal(true);
+		}
+	}, [user]);
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -31,8 +35,6 @@ export default function SignForm({ toggleModal, type }: ISignFormProps) {
 			[name]: value,
 		});
 	};
-
-	const [message, setMessage] = useState('');
 
 	const validateFields = () => {
 		const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/;
@@ -100,6 +102,8 @@ export default function SignForm({ toggleModal, type }: ISignFormProps) {
 						icon: 'success',
 						confirmButtonColor: 'darkblue',
 					});
+
+					navigate(Paths.moves);
 				} else {
 					setMessage(data.message);
 				}
