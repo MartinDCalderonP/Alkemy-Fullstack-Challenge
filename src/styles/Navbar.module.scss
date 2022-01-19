@@ -33,4 +33,16 @@
 			}
 		}
 	}
+
+	.signInButton,
+	.userButton {
+		border: none;
+		cursor: pointer;
+		font-size: 1.25rem;
+		background-color: var(--backgroundColor);
+
+		.buttonIcon {
+			margin: 0 10px;
+		}
+	}
 }
