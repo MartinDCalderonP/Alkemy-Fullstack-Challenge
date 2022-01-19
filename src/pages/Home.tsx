@@ -6,10 +6,10 @@ export default function Home() {
 	return (
 		<Layout>
 			<div className={styles.home}>
-				<h1 className={styles.title}>Home</h1>
-				<p className={styles.welcome}>
-					Welcome to the home page. You must be logged in to view your moves in
-					the moves page.
+				<h1 className={styles.title}>Welcome!</h1>
+				<p className={styles.subtitle}>
+					You must be logged in to view your incomes & outcomes in the moves
+					page.
 				</p>
 			</div>
 		</Layout>
