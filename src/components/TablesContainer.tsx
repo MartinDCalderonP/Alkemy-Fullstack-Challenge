@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/TablesContainer.module.scss';
 import { useContextState } from '../context/Context';
+import { getMovesFetchUrl } from '../common/Helpers';
 import { ITablesContainerProps, IMove } from '../common/Interfaces';
-import { API } from '../common/Enums';
 import Table from './Table';
 import Toast from './Toast';
 
@@ -12,7 +12,8 @@ export default function TablesContainer({
 }: ITablesContainerProps) {
 	const { user } = useContextState();
 
-	const fetchUrl = `${API.base}${API.moves}${API.byUserId}/${user.user_id}`;
+	const fetchUrl = getMovesFetchUrl(user.user_id);
+
 	const [moves, setMoves] = useState([]);
 	const [message, setMessage] = useState('');
 

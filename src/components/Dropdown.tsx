@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import { useContextState } from '../context/Context';
 import { initialUser } from '../context/Reducer';
 import useOnClickOutside from '../hooks/useOnClickOutside';
-import { API, Paths } from '../common/Enums';
+import { Paths } from '../common/Enums';
+import { signOutFetchUrl } from '../common/Helpers';
 import { IDropdownProps } from '../common/Interfaces';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExchangeAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
@@ -22,7 +23,7 @@ export default function Dropdown({ toggleDropdown }: IDropdownProps) {
 	useOnClickOutside(ref, handleToggleDropdown);
 
 	const handleSignOut = () => {
-		const fetchUrl = `${API.base}${API.auth}`;
+		const fetchUrl = signOutFetchUrl();
 
 		fetch(fetchUrl, {
 			method: 'DELETE',

@@ -1,7 +1,8 @@
 import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import styles from '../styles/SignForm.module.scss';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { API, Paths } from '../common/Enums';
+import { Paths } from '../common/Enums';
+import { signInOrUpFetchUrl } from '../common/Helpers';
 import { ISignFormProps } from '../common/Interfaces';
 import { useContextState } from '../context/Context';
 import Input from './Input';
@@ -75,10 +76,7 @@ export default function SignForm({ toggleModal, type }: ISignFormProps) {
 			return;
 		}
 
-		const fetchUrl =
-			type === 'signIn'
-				? `${API.base}${API.auth}${API.users}`
-				: `${API.base}${API.signUp}${API.users}`;
+		const fetchUrl = signInOrUpFetchUrl(type);
 
 		fetch(fetchUrl, {
 			method: 'POST',

@@ -8,7 +8,7 @@ import React, {
 import styles from '../styles/MovesForm.module.scss';
 import { throttle } from 'lodash';
 import { useContextState } from '../context/Context';
-import { API } from '../common/Enums';
+import { getMoveByIdFetchUrl, postOrPutMoveFetchUrl } from '../common/Helpers';
 import { IFormProps } from '../common/Interfaces';
 import FormCard from './FormCard';
 import Input from './Input';
@@ -38,9 +38,9 @@ export default function MovesForm({ getMoveById, refreshMoves }: IFormProps) {
 	const [message, setMessage] = useState('');
 
 	useEffect(() => {
-		const fetchUrl = `${API.base}${API.moves}${API.byMoveId}/${user.user_id}/${getMoveById}`;
-
 		if (getMoveById) {
+			const fetchUrl = getMoveByIdFetchUrl(user.user_id, getMoveById);
+
 			fetch(fetchUrl)
 				.then((res) => res.json())
 				.then((data) => {
@@ -90,9 +90,7 @@ export default function MovesForm({ getMoveById, refreshMoves }: IFormProps) {
 
 	const throttledSubmit = useCallback(
 		throttle(() => {
-			const fetchURL = !move.id
-				? `${API.base}${API.moves}`
-				: `${API.base}${API.moves}/${move.id}`;
+			const fetchUrl = postOrPutMoveFetchUrl(move.id);
 
 			const fetchMethod = !move.id ? 'POST' : 'PUT';
 
@@ -101,7 +99,7 @@ export default function MovesForm({ getMoveById, refreshMoves }: IFormProps) {
 				userId: user.user_id,
 			};
 
-			fetch(fetchURL, {
+			fetch(fetchUrl, {
 				method: fetchMethod,
 				body: JSON.stringify(body),
 				headers: {
