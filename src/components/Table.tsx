@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/Table.module.scss';
 import { useContextState } from '../context/Context';
-import { API } from '../common/Enums';
-import { IMove } from '../common/Interfaces';
-import { format } from '../common/Helpers';
+import useFetch from '../hooks/useFetch';
+import { IMove, IStatusResponse } from '../common/Interfaces';
+import { deleteMoveFetchUrl, format } from '../common/Helpers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import MyButton from './MyButton';
@@ -23,6 +23,9 @@ export default function Table({
 	refreshMoves,
 }: ITableProps) {
 	const { user } = useContextState();
+	const [fetchUrl, setFetchUrl] = useState('');
+	const [fetchOptions, setFetchOptions] = useState({});
+	const { data, error } = useFetch<IStatusResponse>(fetchUrl, fetchOptions);
 
 	const handleEditMove = (moveId: number) => {
 		getMoveById(moveId);
@@ -44,23 +47,29 @@ export default function Table({
 					userId: user.user_id,
 				};
 
-				fetch(`${API.base}${API.moves}/${moveId}`, {
+				setFetchOptions({
 					method: 'DELETE',
 					body: JSON.stringify(body),
 					headers: {
 						Accept: 'application/json',
 						'Content-Type': 'application/json',
 					},
-				})
-					.then((res) => res.json())
-					.then((data) => {
-						message(data.message);
-						refreshMoves();
-					})
-					.catch((err) => message(err));
+				});
+				setFetchUrl(deleteMoveFetchUrl(moveId));
 			}
 		});
 	};
+
+	useEffect(() => {
+		if (data) {
+			message(data.message);
+			refreshMoves();
+		}
+
+		if (error) {
+			message(error.message);
+		}
+	}, [data]);
 
 	return (
 		<div className={styles.tableContainer}>
