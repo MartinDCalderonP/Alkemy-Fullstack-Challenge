@@ -13,7 +13,7 @@ export interface IUserData {
 	user_password: string;
 }
 
-export interface IResponseData {
+export interface IStatusResponse {
 	status: string;
 	message: string;
 }
