@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
+import { IStatusResponse } from '../common/Interfaces';
 
 export default function useFetch<T>(url: string, options?: RequestInit) {
-	const [data, setData] = useState<T | undefined>(undefined);
+	const [data, setData] = useState<T>();
 	const [loading, setLoading] = useState<boolean>(true);
-	const [error, setError] = useState<string | undefined>(undefined);
+	const [error, setError] = useState<IStatusResponse>();
 
 	const fetchData = async (url: string, options?: RequestInit) => {
 		setLoading(true);
