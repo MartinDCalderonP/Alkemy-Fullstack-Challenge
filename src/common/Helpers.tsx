@@ -20,6 +20,10 @@ export const postOrPutMoveFetchUrl = (moveId?: number): string => {
 		: `${API.base}${API.moves}/${moveId}`;
 };
 
+export const deleteMoveFetchUrl = (moveId: number): string => {
+	return `${API.base}${API.moves}/${moveId}`;
+};
+
 export const signInOrUpFetchUrl = (type: string): string => {
 	return type === 'signIn'
 		? `${API.base}${API.auth}${API.users}`
