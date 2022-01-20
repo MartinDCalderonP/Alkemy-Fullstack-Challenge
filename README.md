@@ -4,7 +4,7 @@ This Alkemy Fullstack Challenge is a money moves manager app made with React and
 
 # Things that are working now
 
-Well, the name is clear, in this app one can create, read, update and delete (CRUD) the moves. It uses Sweet Alert to confirm deletion and Material UI for the inputs. The last added thing is the login, but the register is not implemented yet.
+Well, the name is clear, in this app one can create, read, update and delete (CRUD) the moves. It uses Sweet Alert to confirm deletion and Material UI for the inputs. The last added thing is the login and register with session. It uses MySQL for the database and Node & Express for the backend.
 
 # Next things to add to the project
 
@@ -13,8 +13,6 @@ Add category to the moves and show the moves of the category.
 Add order the moves.
 
 Add search a move.
-
-Use Sequelize.
 
 # Getting Started with Create React App
 
