@@ -1,5 +1,3 @@
-import { ReactNode, ReactElement } from 'react';
-
 export interface IMove {
 	move_id: number;
 	move_description: string;
