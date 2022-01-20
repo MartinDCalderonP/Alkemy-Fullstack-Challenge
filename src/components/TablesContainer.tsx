@@ -79,7 +79,7 @@ export default function TablesContainer({
 
 			{loading && <Spinner />}
 
-			{error && <Toast message={error} closeToast={handleCloseToast} />}
+			{error && <Toast message={error.message} closeToast={handleCloseToast} />}
 		</>
 	);
 }
