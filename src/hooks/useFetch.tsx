@@ -41,5 +41,5 @@ export default function useFetch<T>(url: string, options?: RequestInit) {
 		};
 	}, [url, options]);
 
-	return { data, loading, error };
+	return { data, loading, error, fetchData };
 }
