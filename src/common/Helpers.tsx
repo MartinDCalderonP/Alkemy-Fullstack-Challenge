@@ -26,10 +26,10 @@ export const deleteMoveFetchUrl = (moveId: number): string => {
 
 export const signInOrUpFetchUrl = (type: string): string => {
 	return type === 'signIn'
-		? `${API.base}${API.auth}${API.users}`
+		? `${API.base}${API.signIn}${API.users}`
 		: `${API.base}${API.signUp}${API.users}`;
 };
 
 export const signOutFetchUrl = (): string => {
-	return `${API.base}${API.auth}`;
+	return `${API.base}${API.signIn}`;
 };

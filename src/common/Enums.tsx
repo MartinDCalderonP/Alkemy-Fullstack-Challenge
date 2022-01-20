@@ -3,7 +3,7 @@ export enum API {
 	moves = '/moves',
 	byUserId = '/by-user-id',
 	byMoveId = '/by-move-id',
-	auth = '/auth',
+	signIn = '/sign-in',
 	signUp = '/sign-up',
 	users = '/users',
 }
