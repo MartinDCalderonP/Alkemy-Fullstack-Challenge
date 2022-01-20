@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/TablesContainer.module.scss';
 import { useContextState } from '../context/Context';
+import useFetch from '../hooks/useFetch';
 import { getMovesFetchUrl } from '../common/Helpers';
 import { IMove } from '../common/Interfaces';
 import Table from './Table';
 import Toast from './Toast';
+import Spinner from './Spinner';
 
 interface ITablesContainerProps {
 	getMoveById: (moveId: number) => void;
@@ -16,10 +18,8 @@ export default function TablesContainer({
 	refreshMoves,
 }: ITablesContainerProps) {
 	const { user } = useContextState();
-
 	const fetchUrl = getMovesFetchUrl(user.user_id);
-
-	const [moves, setMoves] = useState([]);
+	const { data, loading, error, fetchData } = useFetch<IMove[]>(fetchUrl);
 	const [message, setMessage] = useState('');
 
 	const handleCloseToast = () => {
@@ -27,18 +27,15 @@ export default function TablesContainer({
 	};
 
 	const getMoves = () => {
-		fetch(fetchUrl)
-			.then((res) => res.json())
-			.then((data) => setMoves(data))
-			.catch((err) => setMessage(err));
+		fetchData(fetchUrl);
 	};
 
 	useEffect(() => {
 		getMoves();
 	}, [refreshMoves]);
 
-	const incomes = moves.filter((move: IMove) => move.move_type === 'income');
-	const outcomes = moves.filter((move: IMove) => move.move_type === 'outcome');
+	const incomes = data?.filter((move: IMove) => move.move_type === 'income');
+	const outcomes = data?.filter((move: IMove) => move.move_type === 'outcome');
 
 	const handleTableMessage = (message: string) => {
 		setMessage(message);
@@ -50,31 +47,39 @@ export default function TablesContainer({
 
 	return (
 		<>
-			<div className={styles.tablesContainer}>
-				<div>
-					<h2>Incomes</h2>
-					<Table
-						moves={incomes}
-						getMoveById={getMoveById}
-						message={handleTableMessage}
-						refreshMoves={handleRefreshMoves}
-					/>
-				</div>
+			{incomes && outcomes && (
+				<>
+					<div className={styles.tablesContainer}>
+						<div>
+							<h2>Incomes</h2>
+							<Table
+								moves={incomes}
+								getMoveById={getMoveById}
+								message={handleTableMessage}
+								refreshMoves={handleRefreshMoves}
+							/>
+						</div>
 
-				<div className={styles.divider} />
+						<div className={styles.divider} />
 
-				<div>
-					<h2>Outcomes</h2>
-					<Table
-						moves={outcomes}
-						getMoveById={getMoveById}
-						message={handleTableMessage}
-						refreshMoves={handleRefreshMoves}
-					/>
-				</div>
-			</div>
+						<div>
+							<h2>Outcomes</h2>
+							<Table
+								moves={outcomes}
+								getMoveById={getMoveById}
+								message={handleTableMessage}
+								refreshMoves={handleRefreshMoves}
+							/>
+						</div>
+					</div>
 
-			{message && <Toast message={message} closeToast={handleCloseToast} />}
+					{message && <Toast message={message} closeToast={handleCloseToast} />}
+				</>
+			)}
+
+			{loading && <Spinner />}
+
+			{error && <Toast message={error} closeToast={handleCloseToast} />}
 		</>
 	);
 }
