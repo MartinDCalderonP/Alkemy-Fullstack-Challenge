@@ -21,9 +21,17 @@
 			display: block;
 			white-space: nowrap;
 			border-right: 4px solid;
-			width: 60ch;
 			overflow: hidden;
+		}
+
+		.steps60 {
+			width: 60ch;
 			animation: typing 3s steps(60), blink 0.5s infinite step-end alternate;
+		}
+
+		.steps47 {
+			width: 47ch;
+			animation: typing 3s steps(47), blink 0.5s infinite step-end alternate;
 		}
 	}
 }
