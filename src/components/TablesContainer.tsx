@@ -2,9 +2,14 @@ import React, { useState, useEffect } from 'react';
 import styles from '../styles/TablesContainer.module.scss';
 import { useContextState } from '../context/Context';
 import { getMovesFetchUrl } from '../common/Helpers';
-import { ITablesContainerProps, IMove } from '../common/Interfaces';
+import { IMove } from '../common/Interfaces';
 import Table from './Table';
 import Toast from './Toast';
+
+interface ITablesContainerProps {
+	getMoveById: (moveId: number) => void;
+	refreshMoves: number;
+}
 
 export default function TablesContainer({
 	getMoveById,

@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styles from '../styles/FormCard.module.scss';
-import { ICardProps } from '../common/Interfaces';
 
-export default function FormCard({ children }: ICardProps) {
+interface IFormCardProps {
+	children: ReactNode;
+}
+
+export default function FormCard({ children }: IFormCardProps) {
 	return <div className={styles.card}>{children}</div>;
 }

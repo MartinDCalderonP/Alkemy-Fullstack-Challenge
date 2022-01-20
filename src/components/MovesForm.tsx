@@ -9,7 +9,6 @@ import styles from '../styles/MovesForm.module.scss';
 import { throttle } from 'lodash';
 import { useContextState } from '../context/Context';
 import { getMoveByIdFetchUrl, postOrPutMoveFetchUrl } from '../common/Helpers';
-import { IFormProps } from '../common/Interfaces';
 import FormCard from './FormCard';
 import Input from './Input';
 import MyButton from './MyButton';
@@ -24,7 +23,12 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
-export default function MovesForm({ getMoveById, refreshMoves }: IFormProps) {
+interface IMovesFormProps {
+	getMoveById: number;
+	refreshMoves: () => void;
+}
+
+export default function MovesForm({ getMoveById, refreshMoves }: IMovesFormProps) {
 	const { user } = useContextState();
 
 	const [move, setMove] = useState({
@@ -117,7 +121,7 @@ export default function MovesForm({ getMoveById, refreshMoves }: IFormProps) {
 						type: 'income',
 						date: new Date(),
 					});
-					refreshMoves(true);
+					refreshMoves();
 				})
 				.catch((err) => setMessage(err));
 		}, 1000),

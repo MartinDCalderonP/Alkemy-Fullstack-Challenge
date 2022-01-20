@@ -6,14 +6,17 @@ import { initialUser } from '../context/Reducer';
 import useOnClickOutside from '../hooks/useOnClickOutside';
 import { Paths } from '../common/Enums';
 import { signOutFetchUrl } from '../common/Helpers';
-import { IDropdownProps } from '../common/Interfaces';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExchangeAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
 
+interface IDropdownProps {
+	toggleDropdown: () => void;
+}
+
 export default function Dropdown({ toggleDropdown }: IDropdownProps) {
 	const ref = useRef(null);
-	
+
 	const { dispatch } = useContextState();
 
 	const handleToggleDropdown = () => {

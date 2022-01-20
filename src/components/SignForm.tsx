@@ -4,10 +4,14 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useContextState } from '../context/Context';
 import { Paths } from '../common/Enums';
 import { signInOrUpFetchUrl } from '../common/Helpers';
-import { ISignFormProps } from '../common/Interfaces';
 import Input from './Input';
 import MyButton from './MyButton';
 import Swal from 'sweetalert2';
+
+interface ISignFormProps {
+	toggleModal: () => void;
+	type: string;
+}
 
 export default function SignForm({ toggleModal, type }: ISignFormProps) {
 	const navigate = useNavigate();
@@ -24,7 +28,7 @@ export default function SignForm({ toggleModal, type }: ISignFormProps) {
 
 	useEffect(() => {
 		if (toggleModal && user.user_id) {
-			toggleModal(true);
+			toggleModal();
 		}
 	}, [user]);
 
@@ -111,7 +115,7 @@ export default function SignForm({ toggleModal, type }: ISignFormProps) {
 	const { pathname } = useLocation();
 
 	const handleToggleModal = () => {
-		toggleModal(true);
+		toggleModal();
 	};
 
 	return (

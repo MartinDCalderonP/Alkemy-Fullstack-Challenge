@@ -2,9 +2,12 @@ import React, { useRef } from 'react';
 import { createPortal } from 'react-dom';
 import styles from '../styles/Modal.module.scss';
 import useOnClickOutside from '../hooks/useOnClickOutside';
-import { IModalProps } from '../common/Interfaces';
 import CloseIcon from './CloseIcon';
 import SignForm from './SignForm';
+
+interface IModalProps {
+	toggleModal: () => void;
+}
 
 export default function Modal({ toggleModal }: IModalProps) {
 	const ref = useRef(null);

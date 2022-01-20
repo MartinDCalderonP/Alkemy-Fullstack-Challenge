@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import styles from '../styles/Toast.module.scss';
-import { IToastProps } from '../common/Interfaces';
 import CloseIcon from './CloseIcon';
+
+interface IToastProps {
+	message: string;
+	closeToast: (close: boolean) => void;
+}
 
 export default function Toast({ message, closeToast }: IToastProps) {
 	useEffect(() => {

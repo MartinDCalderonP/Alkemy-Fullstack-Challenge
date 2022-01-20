@@ -2,12 +2,19 @@ import React from 'react';
 import styles from '../styles/Table.module.scss';
 import { useContextState } from '../context/Context';
 import { API } from '../common/Enums';
-import { ITableProps, IMove } from '../common/Interfaces';
+import { IMove } from '../common/Interfaces';
 import { format } from '../common/Helpers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import MyButton from './MyButton';
 import Swal from 'sweetalert2';
+
+interface ITableProps {
+	moves: IMove[];
+	getMoveById: (moveId: number) => void;
+	message: (message: string) => void;
+	refreshMoves: () => void;
+}
 
 export default function Table({
 	moves,
