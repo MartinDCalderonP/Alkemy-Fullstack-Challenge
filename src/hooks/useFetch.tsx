@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 
-export default function useFetch<T>(url: string, options: RequestInit) {
+export default function useFetch<T>(url: string, options?: RequestInit) {
 	const [data, setData] = useState<T | undefined>(undefined);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string | undefined>(undefined);
 
-	const fetchData = async (url: string, options: RequestInit) => {
+	const fetchData = async (url: string, options?: RequestInit) => {
 		setLoading(true);
 
 		if (!url) {
