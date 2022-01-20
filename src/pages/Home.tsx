@@ -15,7 +15,7 @@ export default function Home() {
 
 				<p className={styles.subtitle}>
 					{user.user_id === 0 && (
-						<span className={`${styles.typewriter} ${styles.steps60}`}>
+						<span className={`${styles.typewriter} ${styles.steps56}`}>
 							You must sign in to view your incomes & outcomes in the moves
 							page.
 						</span>
