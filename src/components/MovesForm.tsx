@@ -8,7 +8,9 @@ import React, {
 import styles from '../styles/MovesForm.module.scss';
 import { throttle } from 'lodash';
 import { useContextState } from '../context/Context';
+import useFetch from '../hooks/useFetch';
 import { getMoveByIdFetchUrl, postOrPutMoveFetchUrl } from '../common/Helpers';
+import { IMove, IStatusResponse } from '../common/Interfaces';
 import FormCard from './FormCard';
 import Input from './Input';
 import MyButton from './MyButton';
@@ -41,27 +43,52 @@ export default function MovesForm({
 		type: 'income',
 		date: new Date(),
 	});
-
 	const [message, setMessage] = useState('');
+	const [fetchValues, setFetchValues] = useState({
+		url: '',
+		options: {},
+	});
+	const { data, error } = useFetch<IMove[] | IStatusResponse>(
+		fetchValues.url,
+		fetchValues.options
+	);
 
 	useEffect(() => {
-		if (getMoveById) {
-			const fetchUrl = getMoveByIdFetchUrl(user.user_id, getMoveById);
+		if (!getMoveById) return;
 
-			fetch(fetchUrl)
-				.then((res) => res.json())
-				.then((data) => {
-					setMove({
-						id: data[0].move_id,
-						description: data[0].move_description,
-						amount: data[0].move_amount.toString(),
-						type: data[0].move_type,
-						date: data[0].move_date,
-					});
-				})
-				.catch((err) => setMessage(err));
-		}
+		setFetchValues({
+			url: getMoveByIdFetchUrl(user.user_id, getMoveById),
+			options: {},
+		});
 	}, [getMoveById]);
+
+	useEffect(() => {
+		if (data && Array.isArray(data)) {
+			setMove({
+				id: data[0].move_id,
+				description: data[0].move_description,
+				amount: data[0].move_amount.toString(),
+				type: data[0].move_type,
+				date: data[0].move_date,
+			});
+		}
+
+		if (data && 'status' in data) {
+			setMessage(data.message);
+			setMove({
+				id: 0,
+				description: '',
+				amount: '',
+				type: 'income',
+				date: new Date(),
+			});
+			refreshMoves();
+		}
+
+		if (error) {
+			setMessage(error.message);
+		}
+	}, [data, error]);
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -97,36 +124,24 @@ export default function MovesForm({
 
 	const throttledSubmit = useCallback(
 		throttle(() => {
-			const fetchUrl = postOrPutMoveFetchUrl(move.id);
-
-			const fetchMethod = !move.id ? 'POST' : 'PUT';
+			const method = !move.id ? 'POST' : 'PUT';
 
 			const body = {
 				...move,
 				userId: user.user_id,
 			};
 
-			fetch(fetchUrl, {
-				method: fetchMethod,
-				body: JSON.stringify(body),
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
+			setFetchValues({
+				url: postOrPutMoveFetchUrl(move.id),
+				options: {
+					method: method,
+					body: JSON.stringify(body),
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+					},
 				},
-			})
-				.then((res) => res.json())
-				.then((data) => {
-					setMessage(data.message);
-					setMove({
-						id: 0,
-						description: '',
-						amount: '',
-						type: 'income',
-						date: new Date(),
-					});
-					refreshMoves();
-				})
-				.catch((err) => setMessage(err));
+			});
 		}, 1000),
 		[move]
 	);
