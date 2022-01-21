@@ -5,12 +5,9 @@ import React, {
 	useEffect,
 	ReactNode,
 } from 'react';
-import reducer, { initialUser, State, Action } from './Reducer';
+import reducer, { initialUser } from './Reducer';
 import useLocalStorage from '../hooks/useLocalStorage';
-
-type Dispatch = (action: Action) => void;
-
-type Context = { user: State; dispatch: Dispatch };
+import { Context } from '../common/Types';
 
 const StateContext = createContext<Context>({} as Context);
 
