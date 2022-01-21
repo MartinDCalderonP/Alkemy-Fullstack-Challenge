@@ -2,8 +2,10 @@ import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import styles from '../styles/SignForm.module.scss';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useContextState } from '../context/Context';
+import useFetch from '../hooks/useFetch';
 import { Paths } from '../common/Enums';
 import { signInOrUpFetchUrl } from '../common/Helpers';
+import { IStatusResponse } from '../common/Interfaces';
 import Input from './Input';
 import MyButton from './MyButton';
 import Swal from 'sweetalert2';
@@ -14,23 +16,19 @@ interface ISignFormProps {
 }
 
 export default function SignForm({ toggleModal, type }: ISignFormProps) {
-	const navigate = useNavigate();
-
 	const { user, dispatch } = useContextState();
-
-	const [userToSign, setUserToSign] = useState({
-		name: '',
-		email: '',
-		password: '',
-	});
-
-	const [message, setMessage] = useState('');
 
 	useEffect(() => {
 		if (toggleModal && user.user_id) {
 			toggleModal();
 		}
 	}, [user]);
+
+	const [userToSign, setUserToSign] = useState({
+		name: '',
+		email: '',
+		password: '',
+	});
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -40,6 +38,12 @@ export default function SignForm({ toggleModal, type }: ISignFormProps) {
 			[name]: value,
 		});
 	};
+
+	const [message, setMessage] = useState('');
+	const [fetchUrl, setFetchUrl] = useState('');
+	const [fetchOptions, setFetchOptions] = useState({});
+	const { data, error } = useFetch<IStatusResponse>(fetchUrl, fetchOptions);
+	const navigate = useNavigate();
 
 	const validateFields = () => {
 		const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/;
@@ -80,37 +84,42 @@ export default function SignForm({ toggleModal, type }: ISignFormProps) {
 			return;
 		}
 
-		const fetchUrl = signInOrUpFetchUrl(type);
-
-		fetch(fetchUrl, {
+		setFetchOptions({
 			method: 'POST',
 			credentials: 'include',
 			body: JSON.stringify(userToSign),
 			headers: {
 				'Content-Type': 'application/json',
 			},
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				if (data.status === 'Success') {
-					dispatch({
-						type: 'SET_USER',
-						payload: {
-							...data.user,
-						},
-					});
-					Swal.fire({
-						text: data.message,
-						icon: 'success',
-						confirmButtonColor: 'darkblue',
-					});
-
-					navigate(Paths.moves);
-				} else {
-					setMessage(data.message);
-				}
-			});
+		});
+		setFetchUrl(signInOrUpFetchUrl(type));
 	};
+
+	useEffect(() => {
+		if (data && data.user) {
+			dispatch({
+				type: 'SET_USER',
+				payload: {
+					...data.user,
+				},
+			});
+			Swal.fire({
+				text: data.message,
+				icon: 'success',
+				confirmButtonColor: 'darkblue',
+			});
+
+			navigate(Paths.moves);
+		}
+
+		if (data && data.status === 'Error') {
+			setMessage(data.message);
+		}
+
+		if (error) {
+			setMessage(error.message);
+		}
+	}, [data, error]);
 
 	const { pathname } = useLocation();
 
