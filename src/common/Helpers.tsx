@@ -1,4 +1,4 @@
-import { API } from '../common/Enums';
+import { API } from './Enums';
 
 export const format = (
 	date: Date,
