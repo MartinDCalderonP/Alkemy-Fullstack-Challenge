@@ -28,7 +28,10 @@ interface IMovesFormProps {
 	refreshMoves: () => void;
 }
 
-export default function MovesForm({ getMoveById, refreshMoves }: IMovesFormProps) {
+export default function MovesForm({
+	getMoveById,
+	refreshMoves,
+}: IMovesFormProps) {
 	const { user } = useContextState();
 
 	const [move, setMove] = useState({
@@ -51,7 +54,7 @@ export default function MovesForm({ getMoveById, refreshMoves }: IMovesFormProps
 					setMove({
 						id: data[0].move_id,
 						description: data[0].move_description,
-						amount: data[0].move_amount,
+						amount: data[0].move_amount.toString(),
 						type: data[0].move_type,
 						date: data[0].move_date,
 					});
