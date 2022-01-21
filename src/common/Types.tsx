@@ -1,12 +1,13 @@
-import { IUserData } from './Interfaces';
+type IUserData = {
+	user_id: number;
+	user_name: string;
+	user_email: string;
+	user_password: string;
+};
+
+export type State = IUserData;
 
 export type Action = {
 	type: string;
 	payload: IUserData;
 };
-
-export type Dispatch = (action: Action) => void;
-
-export type State = IUserData;
-
-export type Context = { user: State; dispatch: Dispatch };
