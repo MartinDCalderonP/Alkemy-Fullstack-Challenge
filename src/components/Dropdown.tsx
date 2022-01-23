@@ -26,16 +26,23 @@ export default function Dropdown({ toggleDropdown }: IDropdownProps) {
 	useOnClickOutside(ref, handleToggleDropdown);
 
 	const { dispatch } = useContextState();
-	const [fetchUrl, setFetchUrl] = useState('');
-	const [fetchOptions, setFetchOptions] = useState({});
-	const { data, error } = useFetch<IStatusResponse>(fetchUrl, fetchOptions);
+	const [fetchValues, setFetchValues] = useState({
+		url: '',
+		options: {},
+	});
+	const { data, error } = useFetch<IStatusResponse>(
+		fetchValues.url,
+		fetchValues.options
+	);
 
 	const handleSignOut = () => {
-		setFetchOptions({
-			method: 'DELETE',
-			crential: 'include',
+		setFetchValues({
+			url: signOutFetchUrl(),
+			options: {
+				method: 'DELETE',
+				credentials: 'include',
+			},
 		});
-		setFetchUrl(signOutFetchUrl());
 	};
 
 	useEffect(() => {

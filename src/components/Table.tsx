@@ -23,9 +23,14 @@ export default function Table({
 	refreshMoves,
 }: ITableProps) {
 	const { user } = useContextState();
-	const [fetchUrl, setFetchUrl] = useState('');
-	const [fetchOptions, setFetchOptions] = useState({});
-	const { data, error } = useFetch<IStatusResponse>(fetchUrl, fetchOptions);
+	const [fetchValues, setFetchValues] = useState({
+		url: '',
+		options: {},
+	});
+	const { data, error } = useFetch<IStatusResponse>(
+		fetchValues.url,
+		fetchValues.options
+	);
 
 	const handleEditMove = (moveId: number) => {
 		getMoveById(moveId);
@@ -47,15 +52,17 @@ export default function Table({
 					userId: user.user_id,
 				};
 
-				setFetchOptions({
-					method: 'DELETE',
-					body: JSON.stringify(body),
-					headers: {
-						Accept: 'application/json',
-						'Content-Type': 'application/json',
+				setFetchValues({
+					url: deleteMoveFetchUrl(moveId),
+					options: {
+						method: 'DELETE',
+						body: JSON.stringify(body),
+						headers: {
+							Accept: 'application/json',
+							'Content-Type': 'application/json',
+						},
 					},
 				});
-				setFetchUrl(deleteMoveFetchUrl(moveId));
 			}
 		});
 	};

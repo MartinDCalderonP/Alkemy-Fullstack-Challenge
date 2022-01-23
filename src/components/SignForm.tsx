@@ -40,9 +40,14 @@ export default function SignForm({ toggleModal, type }: ISignFormProps) {
 	};
 
 	const [message, setMessage] = useState('');
-	const [fetchUrl, setFetchUrl] = useState('');
-	const [fetchOptions, setFetchOptions] = useState({});
-	const { data, error } = useFetch<IStatusResponse>(fetchUrl, fetchOptions);
+	const [fetchValues, setFetchValues] = useState({
+		url: '',
+		options: {},
+	});
+	const { data, error } = useFetch<IStatusResponse>(
+		fetchValues.url,
+		fetchValues.options
+	);
 	const navigate = useNavigate();
 
 	const validateFields = () => {
@@ -84,15 +89,17 @@ export default function SignForm({ toggleModal, type }: ISignFormProps) {
 			return;
 		}
 
-		setFetchOptions({
-			method: 'POST',
-			credentials: 'include',
-			body: JSON.stringify(userToSign),
-			headers: {
-				'Content-Type': 'application/json',
+		setFetchValues({
+			url: signInOrUpFetchUrl(type),
+			options: {
+				method: 'POST',
+				credentials: 'include',
+				body: JSON.stringify(userToSign),
+				headers: {
+					'Content-Type': 'application/json',
+				},
 			},
 		});
-		setFetchUrl(signInOrUpFetchUrl(type));
 	};
 
 	useEffect(() => {
