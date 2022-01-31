@@ -48,18 +48,14 @@ export default function Table({
 			reverseButtons: true,
 		}).then((result) => {
 			if (result.isConfirmed) {
-				const body = {
-					userId: user.user_id,
-				};
-
 				setFetchValues({
 					url: deleteMoveFetchUrl(moveId),
 					options: {
 						method: 'DELETE',
-						body: JSON.stringify(body),
 						headers: {
 							Accept: 'application/json',
 							'Content-Type': 'application/json',
+							Authorization: `Bearer ${user.user_token}`,
 						},
 					},
 				});
