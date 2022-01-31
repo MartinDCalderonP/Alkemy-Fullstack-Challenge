@@ -178,13 +178,13 @@ export default function SignForm({ toggleModal, type }: ISignFormProps) {
 
 			{type === 'signIn' && pathname !== '/sign-up' && (
 				<Link className={styles.signLink} to={Paths.signUp}>
-					{"Don't have an account? Sign Up"}
+					{'Don\'t have an account? Sign Up'}
 				</Link>
 			)}
 
 			{type === 'signIn' && pathname === '/sign-up' && (
 				<a className={styles.signLink} href="#" onClick={handleToggleModal}>
-					{"Don't have an account? Sign Up"}
+					{'Don\'t have an account? Sign Up'}
 				</a>
 			)}
 

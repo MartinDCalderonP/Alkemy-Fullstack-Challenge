@@ -221,7 +221,7 @@ export default function MovesForm({
 
 				{move.id > 0 && (
 					<p className={styles.radioWarning}>
-						{"You can't change the move type"}.
+						{'You can\'t change the move type.'}
 					</p>
 				)}
 
