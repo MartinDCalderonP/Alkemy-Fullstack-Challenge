@@ -6,8 +6,8 @@ export const format = (
 	options?: Intl.DateTimeFormatOptions
 ) => new Intl.DateTimeFormat(locale, options).format(new Date(date));
 
-export const getMovesFetchUrl = (userId: number): string => {
-	return `${API.base}${API.moves}${API.byUserId}/${userId}`;
+export const getMovesFetchUrl = (): string => {
+	return `${API.base}${API.moves}`;
 };
 
 export const getMoveByIdFetchUrl = (userId: number, moveId: number): string => {

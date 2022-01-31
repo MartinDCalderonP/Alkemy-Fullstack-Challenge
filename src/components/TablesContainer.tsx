@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import styles from '../styles/TablesContainer.module.scss';
 import { useContextState } from '../context/Context';
 import useFetch from '../hooks/useFetch';
@@ -18,8 +18,20 @@ export default function TablesContainer({
 	refreshMoves,
 }: ITablesContainerProps) {
 	const { user } = useContextState();
-	const fetchUrl = getMovesFetchUrl(user.user_id);
-	const { data, loading, error, fetchData } = useFetch<IMove[]>(fetchUrl);
+	const fetchValues = useMemo(() => {
+		return {
+			url: getMovesFetchUrl(),
+			options: {
+				headers: {
+					Authorization: `Bearer ${user.user_token}`,
+				},
+			},
+		};
+	}, [user.user_token]);
+	const { data, loading, error, fetchData } = useFetch<IMove[]>(
+		fetchValues.url,
+		fetchValues.options
+	);
 	const [message, setMessage] = useState('');
 
 	const handleCloseToast = () => {
@@ -27,7 +39,7 @@ export default function TablesContainer({
 	};
 
 	const getMoves = () => {
-		fetchData(fetchUrl);
+		fetchData(fetchValues.url, fetchValues.options);
 	};
 
 	useEffect(() => {
