@@ -5,6 +5,7 @@ export const initialUser = {
 	user_name: '',
 	user_email: '',
 	user_password: '',
+	user_token: '',
 };
 
 export const actionTypes = {

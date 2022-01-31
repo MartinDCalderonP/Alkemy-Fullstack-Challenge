@@ -11,10 +11,12 @@ export interface IUserData {
 	user_name: string;
 	user_email: string;
 	user_password: string;
+	user_token: string;
 }
 
 export interface IStatusResponse {
 	status: string;
 	message: string;
 	user?: IUserData;
+	token?: string;
 }
