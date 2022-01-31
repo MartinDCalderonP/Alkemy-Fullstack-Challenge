@@ -10,8 +10,8 @@ export const getMovesFetchUrl = (): string => {
 	return `${API.base}${API.moves}`;
 };
 
-export const getMoveByIdFetchUrl = (userId: number, moveId: number): string => {
-	return `${API.base}${API.moves}${API.byMoveId}/${userId}/${moveId}`;
+export const getMoveByIdFetchUrl = (moveId: number): string => {
+	return `${API.base}${API.moves}/${moveId}`;
 };
 
 export const postOrPutMoveFetchUrl = (moveId?: number): string => {

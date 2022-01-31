@@ -57,8 +57,12 @@ export default function MovesForm({
 		if (!getMoveById) return;
 
 		setFetchValues({
-			url: getMoveByIdFetchUrl(user.user_id, getMoveById),
-			options: {},
+			url: getMoveByIdFetchUrl(getMoveById),
+			options: {
+				headers: {
+					Authorization: `Bearer ${user.user_token}`,
+				},
+			},
 		});
 	}, [getMoveById]);
 
@@ -126,19 +130,15 @@ export default function MovesForm({
 		throttle(() => {
 			const method = !move.id ? 'POST' : 'PUT';
 
-			const body = {
-				...move,
-				userId: user.user_id,
-			};
-
 			setFetchValues({
 				url: postOrPutMoveFetchUrl(move.id),
 				options: {
 					method: method,
-					body: JSON.stringify(body),
+					body: JSON.stringify(move),
 					headers: {
 						Accept: 'application/json',
 						'Content-Type': 'application/json',
+						Authorization: `Bearer ${user.user_token}`,
 					},
 				},
 			});
