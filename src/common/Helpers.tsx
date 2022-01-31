@@ -31,5 +31,5 @@ export const signInOrUpFetchUrl = (type: string): string => {
 };
 
 export const signOutFetchUrl = (): string => {
-	return `${API.base}${API.signIn}`;
+	return `${API.base}${API.signIn}${API.users}`;
 };
