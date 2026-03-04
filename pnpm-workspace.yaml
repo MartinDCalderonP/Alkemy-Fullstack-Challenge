@@ -1,0 +1,8 @@
+overrides:
+  '@eslint/plugin-kit@<0.3.4': '>=0.3.4'
+  '@remix-run/router@<=1.23.1': '>=1.23.2'
+  nth-check@<2.0.1: '>=2.0.1'
+  postcss@<8.4.31: '>=8.4.31'
+  serialize-javascript@<=7.0.2: '>=7.0.3'
+  underscore@<=1.13.7: '>=1.13.8'
+  webpack-dev-server@<=5.2.0: '>=5.2.1'
